@@ -1,0 +1,6 @@
+path: ./yolotrain
+train: ./yolotrain/train
+val: ./yolotrain/val
+
+nc: 1
+names: ['qr_code']
