@@ -33,8 +33,8 @@ class RaspberryPiQRDetector:
         # 加载YOLO模型 - 使用轻量级模式和优化设置
         try:
             self.model = YOLO(model_path)
-            # 设置模型为半精度推理以提高性能
-            self.model.model.half()
+            # 注意：不在初始化时转换为 half，让 YOLO 在推理时自动处理
+            # 以避免类型不匹配问题
             print(f"成功加载YOLO模型: {model_path}")
         except Exception as e:
             print(f"加载模型失败: {e}")
@@ -75,7 +75,7 @@ class RaspberryPiQRDetector:
         
         # 创建结果保存目录
         if save_images:
-            self.results_dir = Path("/home/pi/QR_Code_Results")
+            self.results_dir = Path("/home/kimi/QR_Code_Results")
             self.results_dir.mkdir(parents=True, exist_ok=True)
         
         # 二维码识别历史
@@ -336,9 +336,9 @@ class RaspberryPiQRDetector:
             self.frame_count = 0
             self.start_time = time.time()
             
-            # 优化的处理参数
-            yolo_interval = 3  # 每3帧运行一次YOLO检测
-            qr_interval = 2    # 每2帧运行一次二维码检测
+            # 平衡性能和质量的参数
+            yolo_interval = 5  # 每5帧运行一次YOLO检测
+            qr_interval = 3     # 每3帧运行一次二维码检测
             display_interval = 1  # 每帧都显示
             
             # 预分配数组以减少内存分配
@@ -369,12 +369,13 @@ class RaspberryPiQRDetector:
                     self.last_yolo_result is not None):
                     yolo_results = self.last_yolo_result
                 elif self.frame_count % yolo_interval == 0:
-                    # 使用更小的输入尺寸和优化的参数
+                    # 使用合适的输入尺寸以保持检测质量
                     yolo_start = time.time()
-                    yolo_results = self.model(frame, verbose=False, 
+                    # 先将图像缩小到合适的尺寸
+                    small_frame_for_yolo = cv2.resize(frame, (416, 416))
+                    yolo_results = self.model(small_frame_for_yolo, verbose=False, 
                                             conf=self.yolo_confidence, 
-                                            imgsz=256,  # 进一步减小输入尺寸
-                                            half=True,  # 使用半精度
+                                            imgsz=416,  # 适中的输入尺寸保持识别率
                                             device='cpu')  # 强制使用CPU
                     yolo_time = time.time() - yolo_start
                     self.performance_stats['yolo_times'].append(yolo_time)
@@ -383,12 +384,15 @@ class RaspberryPiQRDetector:
                     self.last_yolo_result = yolo_results
                     self.yolo_cache_time = current_time
                 
-                # 智能二维码检测 - 优先在YOLO检测区域
+                # 智能二维码检测 - 优先在YOLO检测区域，减少频率
                 if yolo_results and self.frame_count % qr_interval == 0:
                     qr_start = time.time()
+                    # 只处理第一个检测框
                     for result in yolo_results:
                         boxes = result.boxes.xyxy.cpu().numpy()
-                        for box in boxes:
+                        if len(boxes) > 0:
+                            # 只处理第一个框
+                            box = boxes[0]
                             x1, y1, x2, y2 = map(int, box)
                             # 确保坐标在图像范围内
                             x1, y1 = max(0, x1), max(0, y1)
@@ -396,46 +400,82 @@ class RaspberryPiQRDetector:
                             
                             if x2 > x1 and y2 > y1:
                                 roi = frame[y1:y2, x1:x2]
-                                roi_qr_results = self.detect_qr_codes(roi)
-                                
-                                # 调整坐标
-                                for qr in roi_qr_results:
-                                    qr['rect'] = type('obj', (object,), {
-                                        'left': qr['rect'].left + x1,
-                                        'top': qr['rect'].top + y1,
-                                        'width': qr['rect'].width,
-                                        'height': qr['rect'].height
-                                    })
-                                    if qr['points'] is not None:
-                                        qr['points'] += np.array([x1, y1])
-                                    qr_results.append(qr)
+                                # 只检测一次，不进行预处理
+                                try:
+                                    roi_qr_codes = pyzbar.decode(roi)
+                                    if roi_qr_codes:
+                                        for qr_code in roi_qr_codes:
+                                            try:
+                                                data = qr_code.data.decode("utf-8")
+                                                qr_results.append({
+                                                    'data': data,
+                                                    'rect': type('obj', (object,), {
+                                                        'left': qr_code.rect.left + x1,
+                                                        'top': qr_code.rect.top + y1,
+                                                        'width': qr_code.rect.width,
+                                                        'height': qr_code.rect.height
+                                                    })
+                                                })
+                                            except UnicodeDecodeError:
+                                                continue
+                                except Exception:
+                                    pass
+                        break  # 只处理第一个结果
                     qr_time = time.time() - qr_start
                     self.performance_stats['qr_times'].append(qr_time)
                 
                 # 如果YOLO区域没有检测到，进行全图检测
                 if not qr_results and self.frame_count % (qr_interval * 2) == 0:
                     qr_start = time.time()
-                    # 使用更小的图像进行检测
-                    small_frame = cv2.resize(frame, (0, 0), fx=0.4, fy=0.4)
-                    small_qr_results = self.detect_qr_codes(small_frame)
+                    # 使用适中的图像尺寸进行检测
+                    scale_factor = 0.6  # 保持较好清晰度
+                    new_width = int(frame.shape[1] * scale_factor)
+                    new_height = int(frame.shape[0] * scale_factor)
+                    small_frame = cv2.resize(frame, (new_width, new_height))
                     
-                    # 调整坐标
-                    for qr in small_qr_results:
-                        qr['rect'] = type('obj', (object,), {
-                            'left': int(qr['rect'].left * 2.5),
-                            'top': int(qr['rect'].top * 2.5),
-                            'width': int(qr['rect'].width * 2.5),
-                            'height': int(qr['rect'].height * 2.5)
-                        })
-                        if qr['points'] is not None:
-                            qr['points'] = (qr['points'] * 2.5).astype(np.int32)
-                        qr_results.append(qr)
+                    try:
+                        small_qr_codes = pyzbar.decode(small_frame)
+                        if small_qr_codes:
+                            for qr_code in small_qr_codes:
+                                try:
+                                    data = qr_code.data.decode("utf-8")
+                                    # 调整坐标
+                                    scale_x = frame.shape[1] / new_width
+                                    scale_y = frame.shape[0] / new_height
+                                    qr_results.append({
+                                        'data': data,
+                                        'rect': type('obj', (object,), {
+                                            'left': int(qr_code.rect.left * scale_x),
+                                            'top': int(qr_code.rect.top * scale_y),
+                                            'width': int(qr_code.rect.width * scale_x),
+                                            'height': int(qr_code.rect.height * scale_y)
+                                        })
+                                    })
+                                except UnicodeDecodeError:
+                                    continue
+                    except Exception:
+                        pass
                     qr_time = time.time() - qr_start
                     self.performance_stats['qr_times'].append(qr_time)
                 
-                # 绘制检测结果
+                # 简化绘制 - 减少性能开销
                 if self.frame_count % display_interval == 0:
-                    self.draw_detections(frame, yolo_results, qr_results)
+                    # 只绘制YOLO框，简化二维码绘制
+                    if yolo_results:
+                        for result in yolo_results:
+                            boxes = result.boxes.xyxy.cpu().numpy()
+                            for box in boxes[:2]:  # 只绘制前2个框
+                                x1, y1, x2, y2 = map(int, box)
+                                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 1)
+                    
+                    # 只绘制二维码文本，不画框
+                    if qr_results:
+                        for qr in qr_results[:1]:  # 只显示第一个二维码
+                            rect = qr['rect']
+                            print(f"QR: {qr['data'][:30]}")
+                            # 只显示文本
+                            cv2.putText(frame, "QR Detected", (5, frame.shape[0] - 10), 
+                                       cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 0, 0), 1)
                     
                     # 优化的FPS显示
                     self.frame_count += 1
@@ -476,18 +516,18 @@ class RaspberryPiQRDetector:
             print("程序已退出")
 
 if __name__ == "__main__":
-    # 树莓派5优化的配置
-    resolution = (640, 480)  # 适中的分辨率，平衡性能和效果
-    fps_limit = 20          # 提高目标FPS
+    # 树莓派5平衡质量和性能的配置
+    resolution = (640, 480)  # 适中的分辨率保持清晰度
+    fps_limit = 25          # 保持良好帧率
     
     # 创建并运行检测器
     detector = RaspberryPiQRDetector(
         model_path='./models/best.pt',      # YOLO模型路径
         resolution=resolution,              # 优化的分辨率
-        fps_limit=fps_limit,                # 提高的FPS限制
-        enable_preprocessing=True,          # 启用预处理以提高识别率
+        fps_limit=fps_limit,                # 平衡的FPS限制
+        enable_preprocessing=False,         # 禁用预处理以提升性能
         save_images=False,                  # 默认禁用图像保存以提高性能
-        yolo_confidence=0.4,                # 适中的置信度
-        image_save_interval=3.0             # 减少保存间隔
+        yolo_confidence=0.4,                # 适中的置信度保持识别率
+        image_save_interval=3.0             # 图像保存间隔
     )
     detector.run()

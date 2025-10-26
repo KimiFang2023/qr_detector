@@ -5,6 +5,7 @@ from pyzbar import pyzbar
 import time
 from pathlib import Path
 import os
+from collections import deque
 
 class CameraQRDetector:
     def __init__(self, model_path='./models/best.pt', camera_id=0, resolution=(640, 480), 
@@ -40,6 +41,20 @@ class CameraQRDetector:
         self.last_qr_data = None
         self.last_qr_time = 0
         self.detection_cooldown = 1.0  # 识别冷却时间(秒)
+        
+        # 性能统计
+        self.frame_count = 0
+        self.performance_stats = {
+            'yolo_times': deque(maxlen=100),
+            'qr_times': deque(maxlen=100),
+            'total_times': deque(maxlen=100),
+            'frame_skips': 0
+        }
+        
+        # YOLO结果缓存
+        self.last_yolo_result = None
+        self.yolo_cache_time = 0
+        self.yolo_cache_duration = 0.1  # 100ms缓存
         
         print("摄像头二维码检测器已初始化")
         print(f"分辨率: {resolution[0]}x{resolution[1]}")
@@ -97,6 +112,32 @@ class CameraQRDetector:
             })
         
         return results
+    
+    def get_performance_stats(self):
+        """获取性能统计信息"""
+        stats = {}
+        for key, times in self.performance_stats.items():
+            if key != 'frame_skips' and times:
+                stats[key] = {
+                    'avg': sum(times) / len(times),
+                    'min': min(times),
+                    'max': max(times),
+                    'count': len(times)
+                }
+            elif key == 'frame_skips':
+                stats[key] = times
+        return stats
+
+    def print_performance_stats(self):
+        """打印性能统计信息"""
+        stats = self.get_performance_stats()
+        print("\n=== 性能统计 ===")
+        for key, stat in stats.items():
+            if isinstance(stat, dict):
+                print(f"{key}: 平均={stat['avg']:.3f}s, 最小={stat['min']:.3f}s, 最大={stat['max']:.3f}s, 次数={stat['count']}")
+            else:
+                print(f"{key}: {stat}")
+        print("===============\n")
     
     def draw_detections(self, frame, yolo_results, qr_results):
         """在图像上绘制检测结果"""
@@ -157,14 +198,24 @@ class CameraQRDetector:
                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
     
     def run(self):
-        """启动摄像头实时检测"""
+        """启动摄像头实时检测 - 优化版本"""
         print("开始摄像头实时检测，按'q'键退出")
         
+        # 优化的处理参数
+        yolo_interval = 3  # 每3帧运行一次YOLO检测
+        qr_interval = 2    # 每2帧运行一次二维码检测
+        
         try:
+            self.frame_count = 0
+            start_time = time.time()
+            
             while True:
+                frame_start_time = time.time()
+                
                 # 控制帧率
                 current_time = time.time()
                 if current_time - self.last_frame_time < self.frame_interval:
+                    self.performance_stats['frame_skips'] += 1
                     continue
                 self.last_frame_time = current_time
                 
@@ -177,57 +228,93 @@ class CameraQRDetector:
                 # 创建图像副本用于处理
                 frame_copy = frame.copy()
                 
-                # 运行YOLO检测
-                yolo_results = self.model(frame_copy, verbose=False)
+                # 使用缓存的YOLO结果
+                yolo_results = []
+                if (current_time - self.yolo_cache_time < self.yolo_cache_duration and 
+                    self.last_yolo_result is not None):
+                    yolo_results = self.last_yolo_result
+                elif self.frame_count % yolo_interval == 0:
+                    # 运行YOLO检测
+                    yolo_start = time.time()
+                    yolo_results = self.model(frame_copy, verbose=False, imgsz=640)
+                    yolo_time = time.time() - yolo_start
+                    self.performance_stats['yolo_times'].append(yolo_time)
+                    
+                    # 更新缓存
+                    self.last_yolo_result = yolo_results
+                    self.yolo_cache_time = current_time
                 
                 # 在检测到的区域内尝试识别二维码
                 qr_results = []
-                for result in yolo_results:
-                    boxes = result.boxes.xyxy.cpu().numpy()
-                    
-                    for box in boxes:
-                        x1, y1, x2, y2 = map(int, box)
+                if yolo_results and self.frame_count % qr_interval == 0:
+                    qr_start = time.time()
+                    for result in yolo_results:
+                        boxes = result.boxes.xyxy.cpu().numpy()
                         
-                        # 裁剪检测区域
-                        roi = frame_copy[y1:y2, x1:x2]
-                        
-                        # 在ROI中识别二维码
-                        roi_qr_results = self.detect_qr_codes(roi)
-                        
-                        # 调整二维码坐标到原始图像
-                        for qr in roi_qr_results:
-                            qr['rect'] = type('obj', (object,), {
-                                'left': qr['rect'].left + x1,
-                                'top': qr['rect'].top + y1,
-                                'width': qr['rect'].width,
-                                'height': qr['rect'].height
-                            })
-                            if qr['points'] is not None:
-                                qr['points'] += np.array([x1, y1])
+                        for box in boxes:
+                            x1, y1, x2, y2 = map(int, box)
                             
-                            qr_results.append(qr)
+                            # 裁剪检测区域
+                            roi = frame_copy[y1:y2, x1:x2]
+                            
+                            # 在ROI中识别二维码
+                            roi_qr_results = self.detect_qr_codes(roi)
+                            
+                            # 调整二维码坐标到原始图像
+                            for qr in roi_qr_results:
+                                qr['rect'] = type('obj', (object,), {
+                                    'left': qr['rect'].left + x1,
+                                    'top': qr['rect'].top + y1,
+                                    'width': qr['rect'].width,
+                                    'height': qr['rect'].height
+                                })
+                                if qr['points'] is not None:
+                                    qr['points'] += np.array([x1, y1])
+                                
+                                qr_results.append(qr)
+                    qr_time = time.time() - qr_start
+                    self.performance_stats['qr_times'].append(qr_time)
                 
-                # 即使YOLO没有检测到，也尝试在整幅图像中识别二维码
-                if not qr_results:
+                # 即使YOLO没有检测到，也尝试在整幅图像中识别二维码（降低频率）
+                if not qr_results and self.frame_count % (qr_interval * 3) == 0:
+                    qr_start = time.time()
                     qr_results = self.detect_qr_codes(frame_copy)
+                    qr_time = time.time() - qr_start
+                    self.performance_stats['qr_times'].append(qr_time)
                 
                 # 绘制检测结果
                 self.draw_detections(frame, yolo_results, qr_results)
                 
-                # 显示FPS
-                fps = 1.0 / (time.time() - current_time + 1e-6)
-                cv2.putText(frame, f"FPS: {fps:.1f}", (10, 30), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
+                # 性能统计
+                total_time = time.time() - frame_start_time
+                self.performance_stats['total_times'].append(total_time)
+                
+                # 计算并显示FPS
+                self.frame_count += 1
+                elapsed_time = time.time() - start_time
+                avg_fps = self.frame_count / elapsed_time if elapsed_time > 0 else 0
+                
+                cv2.putText(frame, f"FPS: {avg_fps:.1f}", (10, 30), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
+                
+                # 每100帧打印一次性能统计
+                if self.frame_count % 100 == 0:
+                    self.print_performance_stats()
                 
                 # 显示图像，修改窗口标题
-                cv2.imshow('qr_detector Detector - Press Q to Exit', frame)
+                cv2.imshow('QR Detector - Press Q to Exit', frame)
                 
                 # 按'q'键退出
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
+                    
+        except KeyboardInterrupt:
+            print("程序被用户中断")
         except Exception as e:
             print(f"发生错误: {e}")
         finally:
+            # 打印最终性能统计
+            self.print_performance_stats()
             # 释放资源
             self.cap.release()
             cv2.destroyAllWindows()
@@ -238,8 +325,8 @@ if __name__ == "__main__":
     detector = CameraQRDetector(
         model_path='./models/best.pt',  # YOLO模型路径
         camera_id=0,                    # 默认摄像头
-        resolution=(640, 480),          # 适合树莓派的分辨率
-        fps_limit=15,                   # FPS限制
+        resolution=(1280, 720),          # PC端更高分辨率
+        fps_limit=30,                   # 提高FPS限制
         enable_preprocessing=True       # 启用图像预处理
     )
     detector.run()
