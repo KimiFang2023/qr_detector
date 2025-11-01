@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_190.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://qm.qq.com/cgi-bin/qm/qr?k=oh-K8V511XA0kXFrhafvaQ6GbSh1yx0N
+

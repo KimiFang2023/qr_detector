@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_1297_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://api.weverseshop.io/static/qr/c5d001af27cd44f99c715cc0b1d98978
+

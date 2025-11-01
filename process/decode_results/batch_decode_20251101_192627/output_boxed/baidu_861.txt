@@ -1,0 +1,12 @@
+Image: ./process/output_boxed\baidu_861.jpg
+Decoding successful, found 3 codes
+
+Result 1:
+Type: QRCODE, Content: ¾;7~wf:ba5e62c53310c693bf2cd56dd8bc30a4ba5e62c53310c
+
+Result 2:
+Type: QRCODE, Content: Gr d.!7]0250473bc386884bf5382eaeccd0cf0d0250473bc3868
+
+Result 3:
+Type: QRCODE, Content: V｣vd+q3$33207a096e33034b823223088640f64133207a096e330
+

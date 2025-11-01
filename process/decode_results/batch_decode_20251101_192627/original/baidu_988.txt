@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_988.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://api.mobile.meituan.com/qrcode/rebate?code=09091942180903
+

@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_639.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://weixin.qq.com/r/_L1PV43E-NCDrck09_jq
+
+Result 2:
+Type: QRCODE, Content: http://weixin.qq.com/r/SkNcRHHEsCzPrTUn9xZY
+

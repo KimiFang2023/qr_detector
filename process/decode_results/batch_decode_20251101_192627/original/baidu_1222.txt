@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1222.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://gw.djtaoke.cn/static/silk/1718064469935/nauth.html?router=upper_195816252
+

@@ -1,9 +1,12 @@
 import os
 import sys
+import time
+import csv
 from pathlib import Path
-from typing import Optional, List, Union, Dict, Any, Set, Tuple
+from typing import Optional, List, Dict
 from PIL import Image
 from pyzbar.pyzbar import decode, ZBarSymbol
+from pipeline import run_pipeline
 
 
 
@@ -61,97 +64,159 @@ def decode_image(
 
 
 
-def process_images(
+def list_image_files(input_dir: str) -> List[str]:
+    """List all image file paths in a directory (recursive)."""
+    image_extensions = ('.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tiff', '.webp')
+    files: List[str] = []
+    for root, _dirs, filenames in os.walk(input_dir):
+        for fname in filenames:
+            if fname.lower().endswith(image_extensions):
+                files.append(os.path.join(root, fname))
+    return sorted(files)
+
+
+def decode_directory(
+    step_name: str,
     input_dir: str,
-    output_dir: str,
+    output_base: str,
     supported_symbols: Optional[List[ZBarSymbol]] = None
-) -> float:
-    """Process all images in a directory and save only successfully decoded results.
-    
-    Args:
-        input_dir: Path to the input directory containing images
-        output_dir: Path to the output directory for results
-        supported_symbols: Optional list of barcode/QR code types to recognize
-        
-    Returns:
-        float: Success rate percentage
+) -> Dict[str, int]:
+    """Decode all images in a directory, save per-image results, and return stats.
+
+    Returns a dict with keys: total, success
     """
-    # Ensure output directory exists
-    create_output_directory(output_dir)
+    step_output_dir = os.path.join(output_base, step_name)
+    create_output_directory(step_output_dir)
 
-    # Supported image file extensions
-    image_extensions = ('.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tiff')
+    files = list_image_files(input_dir)
+    total = len(files)
+    success = 0
 
-    # Statistics
-    total_files = 0
-    successfully_decoded = 0
+    for file_path in files:
+        decoded_results = decode_image(file_path, supported_symbols)
+        if decoded_results:
+            success += 1
+            output_file = os.path.splitext(os.path.basename(file_path))[0] + '.txt'
+            output_path = os.path.join(step_output_dir, output_file)
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(f"Image: {file_path}\n")
+                f.write(f"Decoding successful, found {len(decoded_results)} codes\n\n")
+                for i, result in enumerate(decoded_results, 1):
+                    f.write(f"Result {i}:\n{result}\n\n")
+    print(f"Step [{step_name}] - total: {total}, success: {success}")
+    return {"total": total, "success": success}
 
-    # Walk through input directory
-    for root, dirs, files in os.walk(input_dir):
-        for file in files:
-            # Check if file is an image
-            if file.lower().endswith(image_extensions):
-                total_files += 1
-                file_path = os.path.join(root, file)
-                print(f"Processing: {file_path}")
 
-                # Decode image
-                decoded_results = decode_image(file_path, supported_symbols)
+def run_pipeline_and_decode(
+    original_dir: str,
+    output_root: str,
+    supported_symbols: Optional[List[ZBarSymbol]] = None
+) -> None:
+    """Run decode after each pipeline step and write a consolidated report.
 
-                # Generate output file path
-                output_file = os.path.splitext(file)[0] + ".txt"
-                output_path = os.path.join(output_dir, output_file)
+    Success rate denominator is the number of images decodable in the original set.
+    """
+    timestamp = time.strftime('%Y%m%d_%H%M%S')
+    output_base = os.path.join(output_root, f"batch_decode_{timestamp}")
+    create_output_directory(output_base)
 
-                # Only save successfully decoded results
-                if decoded_results and len(decoded_results) > 0:
-                    successfully_decoded += 1
-                    with open(output_path, 'w', encoding='utf-8') as f:
-                        f.write(f"Image: {file_path}\n")
-                        f.write(f"Decoding successful, found {len(decoded_results)} codes\n\n")
-                        for i, result in enumerate(decoded_results, 1):
-                            f.write(f"Result {i}:\n{result}\n\n")
-                    print(f"Decoding successful, results saved to: {output_path}")
-                else:
-                    print(f"No codes recognized from {file}, skipping result file generation")
+    # 先跑完整流程，强制生成各步骤目录
+    print("Running full pipeline...")
+    run_pipeline(
+        input_images_dir=original_dir,
+        output_boxed_dir="./process/output_boxed",
+        output_cropped_dir="./process/output_cropped",
+        output_corrected_dir="./process/output_corrected",
+        output_monochrome_dir="./process/output_monochrome",
+        output_enhanced_dir="./process/output_enhanced",
+        output_restored_dir="./process/output_restored",
+        model_path="./models/best.pt",
+        auto_repair=True,
+        decode_threshold=0.5,
+    )
 
-    # Calculate and return success rate
-    if total_files > 0:
-        success_rate = (successfully_decoded / total_files) * 100
-        print(f"\nProcessing completed! Total files processed: {total_files}, successfully decoded: {successfully_decoded}")
-        print(f"Decoding success rate: {success_rate:.2f}%")
-        return success_rate
-    else:
-        print("\nNo image files found")
-        return 0
+    # 定义固定步骤顺序（不再按存在与否筛选）
+    steps = [
+        ("original", original_dir),
+        ("output_boxed", "./process/output_boxed"),
+        ("output_cropped", "./process/output_cropped"),
+        ("output_corrected", "./process/output_corrected"),
+        ("output_monochrome", "./process/output_monochrome"),
+        ("output_enhanced", "./process/output_enhanced"),
+        ("output_restored", "./process/output_restored"),
+    ]
+
+    # First, compute baseline decodable count from original images
+    original_stats = decode_directory("original", steps[0][1], output_base, supported_symbols)
+    baseline = original_stats["success"]
+    if baseline == 0:
+        print("No decodable images in original set. Using total original images as denominator.")
+        baseline = original_stats["total"]
+    if baseline == 0:
+        print("Original directory contains no images. Abort.")
+        return
+
+    # Decode remaining steps
+    all_stats: List[Dict[str, int]] = []
+    summary_rows: List[List[str]] = []
+
+    # Record original first
+    all_stats.append({"step": "original", **original_stats})
+    summary_rows.append([
+        "original", str(original_stats["total"]), str(original_stats["success"]),
+        f"{(original_stats['success'] / max(baseline, 1)) * 100:.2f}%"
+    ])
+
+    for step_name, step_dir in steps[1:]:
+        stats = decode_directory(step_name, step_dir, output_base, supported_symbols)
+        all_stats.append({"step": step_name, **stats})
+        rate = (stats["success"] / baseline) * 100 if baseline > 0 else 0.0
+        summary_rows.append([step_name, str(stats["total"]), str(stats["success"]), f"{rate:.2f}%"])
+
+    # Write summary CSV and TXT
+    summary_csv = os.path.join(output_base, 'summary.csv')
+    with open(summary_csv, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(["step", "total", "success", "success_rate_vs_original"])
+        writer.writerows(summary_rows)
+
+    summary_txt = os.path.join(output_base, 'summary.txt')
+    with open(summary_txt, 'w', encoding='utf-8') as f:
+        f.write("Decoding Summary (denominator = decodable count in original set)\n")
+        f.write(f"Baseline (original decodable): {baseline}\n\n")
+        for row in summary_rows:
+            f.write(f"step={row[0]}, total={row[1]}, success={row[2]}, rate_vs_original={row[3]}\n")
+    print(f"Summary written to: {summary_txt}\nCSV: {summary_csv}")
 
 
 
 def main() -> None:
-    """Main function to run the barcode/QR code decoder."""
-    # Check command line arguments
-    if len(sys.argv) != 3:
-        print("Usage: python barcode_decoder.py <input_image_folder_path> <output_result_folder_path>")
-        print("Example: python barcode_decoder.py ./images ./results")
-        # Use default paths for demonstration
-        input_dir = "./process/output_enhanced"
-        output_dir = "./process/decode_results/output_enhanced"
-        print(f"Using default paths: input={input_dir}, output={output_dir}")
-    else:
-        input_dir = sys.argv[1]
-        output_dir = sys.argv[2]
+    """Run batch decode across pipeline steps.
 
-    # Check if input directory exists
-    if not os.path.exists(input_dir):
-        print(f"Error: Input directory {input_dir} does not exist")
+    Usage:
+      python batch_decode.py <original_image_folder_path> <output_root_folder_path>
+
+    Defaults:
+      original_image_folder_path = C:\\Users\\Kimi\\PycharmProjects\\baidu_images
+      output_root_folder_path    = ./process/decode_results
+    """
+    if len(sys.argv) >= 2:
+        original_dir = sys.argv[1]
+    else:
+        # Windows 路径，按用户要求
+        original_dir = r"C:\\Users\\Kimi\\PycharmProjects\\baidu_images"
+
+    if len(sys.argv) >= 3:
+        output_root = sys.argv[2]
+    else:
+        output_root = "./process/decode_results"
+
+    if not os.path.isdir(original_dir):
+        print(f"Error: Original directory not found: {original_dir}")
         return
 
-    # Specify which code types to recognize (optional)
-    # For example, to recognize only QR codes and CODE128: [ZBarSymbol.QRCODE, ZBarSymbol.CODE128]
-    # Set to None to recognize all supported types
-    supported_symbols = None
-
-    # Process images
-    process_images(input_dir, output_dir, supported_symbols)
+    supported_symbols = [ZBarSymbol.QRCODE]
+    run_pipeline_and_decode(original_dir, output_root, supported_symbols)
 
 
 

@@ -242,7 +242,7 @@ class RaspberryPiQRDetector:
                              (rect.left, rect.top), 
                              (rect.left + rect.width, rect.top + rect.height), 
                              (255, 0, 0), 1)
-                
+            
                 # 优化文本显示逻辑
                 if qr['data'] != self.last_qr_data or current_time - self.last_qr_time > self.detection_cooldown:
                     self.last_qr_data = qr['data']
@@ -254,7 +254,7 @@ class RaspberryPiQRDetector:
                         self.last_save_time = current_time
                         # 在后台线程中保存图像
                         threading.Thread(target=self._save_image_async, 
-                                       args=(frame.copy(),), daemon=True).start()
+                                         args=(frame.copy(),), daemon=True).start()
                 
                 # 简化文本显示 - 只在必要时绘制
                 if rect.top > 20:
@@ -476,14 +476,14 @@ class RaspberryPiQRDetector:
                             # 只显示文本
                             cv2.putText(frame, "QR Detected", (5, frame.shape[0] - 10), 
                                        cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 0, 0), 1)
-                    
+                
                     # 优化的FPS显示
                     self.frame_count += 1
                     elapsed_time = time.time() - self.start_time
                     if elapsed_time > 0:
                         avg_fps = self.frame_count / elapsed_time
                         cv2.putText(frame, f"FPS: {avg_fps:.1f}", (5, 15), 
-                                   cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 255), 1)
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 255), 1)
                     
                     # 显示图像
                     cv2.imshow('QR Detector', frame)

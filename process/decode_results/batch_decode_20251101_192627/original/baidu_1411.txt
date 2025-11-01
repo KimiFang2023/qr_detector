@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1411.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://qr.youku.com/pr?c=CvIoHOrZB0m1
+

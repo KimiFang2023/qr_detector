@@ -1,0 +1,15 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_349.jpg
+Decoding successful, found 4 codes
+
+Result 1:
+Type: QRCODE, Content: https://www.cyberciti.biz/
+
+Result 2:
+Type: QRCODE, Content: https://u.wechat.com/MKCMz977FfR4zOXXTa7_S00
+
+Result 3:
+Type: QRCODE, Content: www.baidu.com
+
+Result 4:
+Type: QRCODE, Content: www.baidu.com
+

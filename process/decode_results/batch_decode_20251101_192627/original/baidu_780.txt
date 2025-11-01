@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_780.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://C2018010916493124489.szwego.com/static/index.html?link_type=scan_follow&follow_code=C2018010916493124489&wsxc_app=wx877eef35efdc2df0
+

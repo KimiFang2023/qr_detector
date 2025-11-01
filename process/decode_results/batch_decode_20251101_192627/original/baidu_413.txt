@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_413.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://serp.zpserp.com/s.aspx?c=598486870272
+
+Result 2:
+Type: QRCODE, Content: http://serp.zpserp.com/s.aspx?c=598486870272
+

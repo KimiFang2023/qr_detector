@@ -1,0 +1,10 @@
+Decoding Summary (denominator = decodable count in original set)
+Baseline (original decodable): 376
+
+step=original, total=1602, success=376, rate_vs_original=100.00%
+step=output_boxed, total=1602, success=361, rate_vs_original=96.01%
+step=output_cropped, total=1863, success=543, rate_vs_original=144.41%
+step=output_corrected, total=1863, success=521, rate_vs_original=138.56%
+step=output_monochrome, total=1863, success=483, rate_vs_original=128.46%
+step=output_enhanced, total=1863, success=392, rate_vs_original=104.26%
+step=output_restored, total=1863, success=391, rate_vs_original=103.99%

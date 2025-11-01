@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_347.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://weibo.cn/qr/userinfo?uid=3306296037
+
+Result 2:
+Type: QRCODE, Content: http://weixin.qq.com/r/J3WTiyvE63aUrW-o9yA1
+

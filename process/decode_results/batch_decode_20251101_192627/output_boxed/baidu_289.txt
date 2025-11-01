@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_289.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: 騾ｸ鬟主刀迚瑚ｮｾ隶｡
+
+Result 2:
+Type: QRCODE, Content: 騾ｸ鬟主刀迚瑚ｮｾ隶｡
+

@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_1198_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://u.jd.com/yGGLwSg?u_scene=3
+

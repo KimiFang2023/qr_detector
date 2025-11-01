@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1322.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: best seller
+
+Result 2:
+Type: QRCODE, Content: best seller
+

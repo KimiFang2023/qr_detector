@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_535.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://alcatel.m.taobao.com?sprefer=sypj05Â 
+

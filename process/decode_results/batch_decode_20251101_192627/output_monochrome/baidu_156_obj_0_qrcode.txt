@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_156_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://www.maka.im/mk-viewer-7/h5/604676948/S85HQI7IW604676948
+

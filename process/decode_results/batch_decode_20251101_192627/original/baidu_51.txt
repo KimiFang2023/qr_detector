@@ -1,0 +1,15 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_51.jpg
+Decoding successful, found 4 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.lgms.net
+
+Result 2:
+Type: QRCODE, Content: http://www.lgms.net
+
+Result 3:
+Type: QRCODE, Content: http://www.lgms.net
+
+Result 4:
+Type: QRCODE, Content: http://www.lgms.net
+

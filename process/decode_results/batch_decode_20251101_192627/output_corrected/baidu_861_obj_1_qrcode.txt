@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_861_obj_1_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: V｣vd+q3$33207a096e33034b823223088640f64133207a096e330
+

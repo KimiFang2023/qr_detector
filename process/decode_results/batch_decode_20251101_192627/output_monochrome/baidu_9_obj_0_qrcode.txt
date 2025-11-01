@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_9_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://wx.openjia.com/users?mode=2&hpwd=f390fcbda6a92115225820d1
+

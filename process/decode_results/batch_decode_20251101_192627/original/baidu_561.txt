@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_561.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: https://u.wechat.com/ECaUMBIAECwLUg9UhLJEyH0
+
+Result 2:
+Type: QRCODE, Content: https://u.wechat.com/MO6kaQEGodj2gpTkAFvry5Y
+

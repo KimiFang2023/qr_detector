@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1297.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://api.weverseshop.io/static/qr/c5d001af27cd44f99c715cc0b1d98978
+

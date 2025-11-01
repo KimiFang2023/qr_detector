@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1465.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://v.kuaishou.com/f/Y7jKtbGO1
+

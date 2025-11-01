@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_166.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://defdo1.yyeqokcho.com/f/XawslsoabyNyFOp
+

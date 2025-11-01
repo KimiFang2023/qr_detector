@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_809.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://haokawx.lot-ml.com/h5order/index?pudID=492&userid=138948
+

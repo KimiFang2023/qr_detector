@@ -234,7 +234,7 @@ class CameraQRDetector:
                     self.last_yolo_result is not None):
                     yolo_results = self.last_yolo_result
                 elif self.frame_count % yolo_interval == 0:
-                    # 运行YOLO检测
+                # 运行YOLO检测
                     yolo_start = time.time()
                     yolo_results = self.model(frame_copy, verbose=False, imgsz=640)
                     yolo_time = time.time() - yolo_start
@@ -248,30 +248,30 @@ class CameraQRDetector:
                 qr_results = []
                 if yolo_results and self.frame_count % qr_interval == 0:
                     qr_start = time.time()
-                    for result in yolo_results:
-                        boxes = result.boxes.xyxy.cpu().numpy()
+                for result in yolo_results:
+                    boxes = result.boxes.xyxy.cpu().numpy()
+                    
+                    for box in boxes:
+                        x1, y1, x2, y2 = map(int, box)
                         
-                        for box in boxes:
-                            x1, y1, x2, y2 = map(int, box)
+                        # 裁剪检测区域
+                        roi = frame_copy[y1:y2, x1:x2]
+                        
+                        # 在ROI中识别二维码
+                        roi_qr_results = self.detect_qr_codes(roi)
+                        
+                        # 调整二维码坐标到原始图像
+                        for qr in roi_qr_results:
+                            qr['rect'] = type('obj', (object,), {
+                                'left': qr['rect'].left + x1,
+                                'top': qr['rect'].top + y1,
+                                'width': qr['rect'].width,
+                                'height': qr['rect'].height
+                            })
+                            if qr['points'] is not None:
+                                qr['points'] += np.array([x1, y1])
                             
-                            # 裁剪检测区域
-                            roi = frame_copy[y1:y2, x1:x2]
-                            
-                            # 在ROI中识别二维码
-                            roi_qr_results = self.detect_qr_codes(roi)
-                            
-                            # 调整二维码坐标到原始图像
-                            for qr in roi_qr_results:
-                                qr['rect'] = type('obj', (object,), {
-                                    'left': qr['rect'].left + x1,
-                                    'top': qr['rect'].top + y1,
-                                    'width': qr['rect'].width,
-                                    'height': qr['rect'].height
-                                })
-                                if qr['points'] is not None:
-                                    qr['points'] += np.array([x1, y1])
-                                
-                                qr_results.append(qr)
+                            qr_results.append(qr)
                     qr_time = time.time() - qr_start
                     self.performance_stats['qr_times'].append(qr_time)
                 

@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_935.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: https://qr.alipay.com/fkx04974gac9yk702k07r12
+
+Result 2:
+Type: QRCODE, Content: https://qr.alipay.com/fkx04974gac9yk702k07r12
+

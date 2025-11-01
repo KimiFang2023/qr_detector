@@ -1,0 +1,24 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_516.jpg
+Decoding successful, found 7 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9009
+
+Result 2:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9007
+
+Result 3:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9006
+
+Result 4:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9005
+
+Result 5:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9004
+
+Result 6:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9003
+
+Result 7:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9002
+

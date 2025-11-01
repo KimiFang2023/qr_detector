@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_1381_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: xaj3458chi8689@print.rpt.epson.com.cn
+

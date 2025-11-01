@@ -1,0 +1,7 @@
+Image: ./process/output_monochrome\baidu_957_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: こんにちは！デンソーウェーブです。
+https://www.qrcode.com/
+

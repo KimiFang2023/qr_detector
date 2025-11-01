@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_473.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 101python.cn
+

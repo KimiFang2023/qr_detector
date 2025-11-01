@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_48_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://u.wechat.com/kM3W1QHzMxohuKeptY1zQ9I
+

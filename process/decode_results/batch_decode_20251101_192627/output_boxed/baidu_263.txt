@@ -1,0 +1,42 @@
+Image: ./process/output_boxed\baidu_263.jpg
+Decoding successful, found 13 codes
+
+Result 1:
+Type: QRCODE, Content: http://vipx.qr37.cn/1stpOI3
+
+Result 2:
+Type: QRCODE, Content: http://vipx.qr37.cn/1fCTsX
+
+Result 3:
+Type: QRCODE, Content: http://vipx.qr37.cn/1gTKzZ3
+
+Result 4:
+Type: QRCODE, Content: http://vipx.qr37.cn/16T96H4
+
+Result 5:
+Type: QRCODE, Content: http://vipx.qr37.cn/1aoXOY3
+
+Result 6:
+Type: QRCODE, Content: http://vipx.qr37.cn/1RZA5b4
+
+Result 7:
+Type: QRCODE, Content: http://vipx.qr37.cn/1gGSDE
+
+Result 8:
+Type: QRCODE, Content: http://vipx.qr37.cn/1BhcGS4
+
+Result 9:
+Type: QRCODE, Content: http://vipx.qr37.cn/1nsvk32
+
+Result 10:
+Type: QRCODE, Content: http://vipx.qr37.cn/1P4wz9
+
+Result 11:
+Type: QRCODE, Content: http://vipx.qr37.cn/1M1zeJ
+
+Result 12:
+Type: QRCODE, Content: http://vipx.qr37.cn/1DUAPL1
+
+Result 13:
+Type: QRCODE, Content: http://vipx.qr37.cn/1pOwKF3
+

@@ -1,0 +1,27 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_89.jpg
+Decoding successful, found 8 codes
+
+Result 1:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 2:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 3:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 4:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 5:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 6:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 7:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 8:
+Type: QRCODE, Content: http://m.piamo.kr
+

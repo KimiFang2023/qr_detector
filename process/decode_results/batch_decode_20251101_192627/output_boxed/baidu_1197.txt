@@ -1,0 +1,12 @@
+Image: ./process/output_boxed\baidu_1197.jpg
+Decoding successful, found 3 codes
+
+Result 1:
+Type: QRCODE, Content: http://weixin.qq.com/r/TzgtNVLEzg_xrRZW921d
+
+Result 2:
+Type: QRCODE, Content: http://weixin.qq.com/r/TzgtNVLEzg_xrRZW921d
+
+Result 3:
+Type: QRCODE, Content: http://weixin.qq.com/r/TzgtNVLEzg_xrRZW921d
+

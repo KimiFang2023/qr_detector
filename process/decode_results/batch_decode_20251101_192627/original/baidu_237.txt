@@ -1,0 +1,21 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_237.jpg
+Decoding successful, found 6 codes
+
+Result 1:
+Type: QRCODE, Content: https://m.tb.cn/h.epWq2KQ
+
+Result 2:
+Type: QRCODE, Content: https://v.tb.cn/9L.3i8vblRcO?sourceType=other&suid=29f282d8-aeb2-4f48-8fd8-c353ca0d33b7
+
+Result 3:
+Type: QRCODE, Content: https://v.tb.cn/9U.9CYn2Cy4U?sourceType=other&suid=bbd3cca3-af33-48e4-b593-bf582973858d
+
+Result 4:
+Type: QRCODE, Content: https://v.tb.cn/A8.7fpco24TZ?sourceType=other&suid=c0ff7321-81c8-4d78-b5ba-57442af8a51c
+
+Result 5:
+Type: QRCODE, Content: https://v.tb.cn/9K.4K9xthmgL?sourceType=other&suid=9cd89734-0c3e-4f17-bbb9-f89757da14f6
+
+Result 6:
+Type: QRCODE, Content: https://v.tb.cn/9Q.5ermQ83W7?sourceType=other&suid=7501dd9d-483c-4f4c-abd0-db45281d582f
+

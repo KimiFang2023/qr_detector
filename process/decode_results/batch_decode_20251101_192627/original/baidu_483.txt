@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_483.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.yingyong.so/DownLoad.aspx?id=14952&tid=1&file=Demon_Avengers_TD_v1.apk
+

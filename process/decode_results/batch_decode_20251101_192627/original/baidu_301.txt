@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_301.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://item.taobao.com/item.htm?id=542915329959&et_token=49740444f24c4b87ca24bcc952b3e631&et_ver=1.0
+

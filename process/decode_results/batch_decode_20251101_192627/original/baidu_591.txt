@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_591.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://wx.deepba.com/qr/ha.php?t=%E8%A5%BF%E8%A5%BF%E6%98%AF%E4%BD%A0%E7%88%B9
+

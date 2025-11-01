@@ -1,0 +1,39 @@
+Image: ./process/output_boxed\baidu_107.jpg
+Decoding successful, found 12 codes
+
+Result 1:
+Type: QRCODE, Content: I love you.
+
+Result 2:
+Type: QRCODE, Content: I love you.
+
+Result 3:
+Type: QRCODE, Content: I love you.
+
+Result 4:
+Type: QRCODE, Content: I love you.
+
+Result 5:
+Type: QRCODE, Content: I love you.
+
+Result 6:
+Type: QRCODE, Content: I love you.
+
+Result 7:
+Type: QRCODE, Content: I love you.
+
+Result 8:
+Type: QRCODE, Content: I love you.
+
+Result 9:
+Type: QRCODE, Content: I love you.
+
+Result 10:
+Type: QRCODE, Content: I love you.
+
+Result 11:
+Type: QRCODE, Content: I love you.
+
+Result 12:
+Type: QRCODE, Content: I love you.
+

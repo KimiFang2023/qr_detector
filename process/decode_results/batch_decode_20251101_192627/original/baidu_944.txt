@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_944.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://l.blurrrvideo.com/BL7GGE
+

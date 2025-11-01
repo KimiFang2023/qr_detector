@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_667_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 蜥ｨ隸｢螳｢譛堺ｺｫ譖ｴ螟壻ｼ俶Β
+

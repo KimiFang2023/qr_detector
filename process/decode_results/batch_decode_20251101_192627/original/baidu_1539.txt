@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1539.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://223.240.123.196:8000/stulogin
+

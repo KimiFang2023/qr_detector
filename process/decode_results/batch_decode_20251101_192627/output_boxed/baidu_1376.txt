@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_1376.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: 草料二维码
+
+Result 2:
+Type: QRCODE, Content: https://qr61.cn/o3jKYF/qfid6QD
+

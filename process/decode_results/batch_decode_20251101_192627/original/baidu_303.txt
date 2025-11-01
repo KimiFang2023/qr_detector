@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_303.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 这是一个二维码（只要是二维码就可以美化）
+

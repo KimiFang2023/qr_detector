@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_74.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 210802288F
+

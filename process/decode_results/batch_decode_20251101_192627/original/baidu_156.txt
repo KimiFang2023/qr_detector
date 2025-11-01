@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_156.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://www.maka.im/mk-viewer-7/h5/604676948/S85HQI7IW604676948
+

@@ -193,7 +193,33 @@ def enhance_image(
         Enhanced grayscale image
     """
     # Ensure image is grayscale
-    gray = image if len(image.shape) == 2 else cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # Handle different image formats: already grayscale (2D), BGR (3D with 3 channels), or BGRA (3D with 4 channels)
+    if len(image.shape) == 2:
+        # Already grayscale (H, W)
+        gray = image
+    elif len(image.shape) == 3:
+        # Multi-channel image (H, W, C)
+        num_channels = image.shape[2]
+        if num_channels == 1:
+            # Single channel but 3D array, squeeze it
+            gray = image.squeeze(axis=2)
+        elif num_channels == 3:
+            # BGR image
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        elif num_channels == 4:
+            # BGRA image
+            gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
+        else:
+            # Unexpected number of channels, use first channel
+            gray = image[:, :, 0]
+    else:
+        # Unexpected shape, assume grayscale or convert if possible
+        if len(image.shape) == 1:
+            raise ValueError(f"Invalid image shape: {image.shape}")
+        # Try to squeeze to 2D
+        gray = image.squeeze()
+        if len(gray.shape) != 2:
+            raise ValueError(f"Could not convert image to grayscale, shape: {image.shape}")
     
     # Use classical method if no model provided
     if model is None:

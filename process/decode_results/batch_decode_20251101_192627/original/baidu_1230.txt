@@ -1,0 +1,12 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1230.jpg
+Decoding successful, found 3 codes
+
+Result 1:
+Type: QRCODE, Content: http://you.888dly.vip/4/
+
+Result 2:
+Type: QRCODE, Content: http://you.888dly.vip/4/
+
+Result 3:
+Type: QRCODE, Content: http://you.888dly.vip/4/
+

@@ -1,0 +1,15 @@
+Image: ./process/output_boxed\baidu_452.jpg
+Decoding successful, found 4 codes
+
+Result 1:
+Type: QRCODE, Content: http://qr17.cn/FDVFL6
+
+Result 2:
+Type: QRCODE, Content: http://qr19.cn/BCXoNU
+
+Result 3:
+Type: QRCODE, Content: http://qr17.cn/DUrBSj
+
+Result 4:
+Type: QRCODE, Content: http://qr17.cn/CTlDyg
+

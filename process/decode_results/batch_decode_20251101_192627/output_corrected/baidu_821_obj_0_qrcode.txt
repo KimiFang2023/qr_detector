@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_821_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://i.waimai.meituan.com/external/poi/qrcode/caadb481b0788b55a8?utm_source=5801&from=b_qrcode_b
+

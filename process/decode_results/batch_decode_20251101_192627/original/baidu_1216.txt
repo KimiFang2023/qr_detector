@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1216.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://qr14.cn/Dxqnly
+
+Result 2:
+Type: QRCODE, Content: http://qr14.cn/B70KQg
+

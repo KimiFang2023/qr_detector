@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_306_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 茫茫人海，走进生命里的人很多，走进内心的却很少；芸芸众生，相伴一程的不计其数，相守一生的屈指可数
+

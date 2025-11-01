@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_328_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://a.app.qq.com/o/simple.jsp?pkgname=com.youba.barcode&fromcase=40002
+

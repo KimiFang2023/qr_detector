@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_220.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://vacations.ctrip.com/whole-2B126/?searchValue=国内&searchText=国内#ctm_ref=ssc_hp_tour_it_more_01
+

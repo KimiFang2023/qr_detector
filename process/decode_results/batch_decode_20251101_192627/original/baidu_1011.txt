@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1011.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://wixs.henanmu.com/pages/users/login/index?spid=734477
+

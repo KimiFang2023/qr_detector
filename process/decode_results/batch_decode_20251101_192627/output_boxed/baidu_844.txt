@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_844.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.fjadd.com/addr?id=4F0070B6-2546-2D8A-E054-90E2BA510A0C
+

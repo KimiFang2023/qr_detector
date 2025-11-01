@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_438.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://baike.baidu.com/view/70940.htm?org=&fr=qrcode
+

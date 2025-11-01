@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1032.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://ma.zm518.cn/statics/html/liveCode/liveCodeDetails.html?followerId=28d42061576f37b3036e1f&productId=17
+

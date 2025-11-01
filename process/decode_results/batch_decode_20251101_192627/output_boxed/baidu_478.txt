@@ -1,0 +1,21 @@
+Image: ./process/output_boxed\baidu_478.jpg
+Decoding successful, found 6 codes
+
+Result 1:
+Type: QRCODE, Content: 爱你哦我是水印
+
+Result 2:
+Type: QRCODE, Content: 爱你哦我是水印
+
+Result 3:
+Type: QRCODE, Content: 爱你哦我是水印
+
+Result 4:
+Type: QRCODE, Content: 爱你哦我是水印
+
+Result 5:
+Type: QRCODE, Content: 爱你哦我是水印
+
+Result 6:
+Type: QRCODE, Content: 爱你哦我是水印
+

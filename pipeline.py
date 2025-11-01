@@ -3,11 +3,11 @@ from pathlib import Path
 from typing import Optional
 
 # Local module imports
-from yolo import process_images as detect_and_crop
-from angle import process_cropped_qrcodes as correct_angle
+from yolo_detector import process_images as detect_and_crop
+from angle_correction import process_cropped_qrcodes as correct_angle
 from binarize import process_binarization
+from unet_enhance import process_enhancement
 from decode import process_images as decode_dir
-from enhance import process_enhancement
 from repair_wrapper import repair_if_needed
 
 

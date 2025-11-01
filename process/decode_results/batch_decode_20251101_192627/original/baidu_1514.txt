@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1514.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: 1#进线开关柜   接地刀闸已断开
+
+Result 2:
+Type: QRCODE, Content: 1#进线开关柜   接地刀闸已闭合
+

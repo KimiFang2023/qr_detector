@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_376.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.qr-memories.com/timothytuttiett
+
+Result 2:
+Type: QRCODE, Content: http://www.qr-memories.com/timothytuttiett
+

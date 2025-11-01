@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_480_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://ma.m.taobao.com/i/12966151963
+

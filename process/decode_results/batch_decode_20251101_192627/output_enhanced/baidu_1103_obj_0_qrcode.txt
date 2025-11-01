@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_1103_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://zsl.sfood.zjamr.zj.gov.cn/gtin/06941704408508/bat/20210501
+

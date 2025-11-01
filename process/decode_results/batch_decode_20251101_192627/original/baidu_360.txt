@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_360.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: https://www.gyufc.org/home/project/detail/id/212
+
+Result 2:
+Type: QRCODE, Content: https://www.gyufc.org/home/project/detail/id/212
+

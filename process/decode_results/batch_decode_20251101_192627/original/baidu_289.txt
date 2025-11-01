@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_289.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 騾ｸ鬟主刀迚瑚ｮｾ隶｡
+

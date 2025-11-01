@@ -1,0 +1,12 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_430.jpg
+Decoding successful, found 3 codes
+
+Result 1:
+Type: QRCODE, Content: https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIzNjIyNDIzMA==&scene=124#wechat_redirect
+
+Result 2:
+Type: QRCODE, Content: https://weibo.com/onncc?topnav=1&wvr=6&topsug=1&is_all=1
+
+Result 3:
+Type: QRCODE, Content: https://weibo.com/u/5872836496?is_all=1
+

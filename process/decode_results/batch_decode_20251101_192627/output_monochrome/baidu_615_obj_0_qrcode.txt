@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_615_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://youhui.95516.com/hybrid_v3/html/help/download.html?code=62038
+

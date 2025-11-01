@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1381.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: xaj3458chi8689@print.rpt.epson.com.cn
+

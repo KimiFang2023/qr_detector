@@ -1,0 +1,21 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_219.jpg
+Decoding successful, found 6 codes
+
+Result 1:
+Type: QRCODE, Content: 人的吸引力无法像天体那样把自己喜欢的星球吸引到自己身边为自己转，人类却可以做天体做不到的感动与惊喜。
+
+Result 2:
+Type: QRCODE, Content: 从最开始提到你眼睛泛酸，到现在想起你都觉得过往是场梦，没有带走你，我想一个人前行。
+
+Result 3:
+Type: QRCODE, Content: 我愿意把靠窗的位置借给你，让你览遍大江南北，如果你愿意跟我一起远行的话。
+
+Result 4:
+Type: QRCODE, Content: 岁月还漫长，你心地善良，终会有一人陪你骑马喝酒走四方。
+
+Result 5:
+Type: QRCODE, Content: 物体会怀旧，所以它停止后还会有以前的运动趋势。
+
+Result 6:
+Type: QRCODE, Content: 来时花铺满路，去时已荒芜。
+

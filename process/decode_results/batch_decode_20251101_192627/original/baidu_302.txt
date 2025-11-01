@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_302.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: PWY_O+uo0XnlqFu5vmxBj3sfa6T3izJ6h9ZCp68aPmmNTP/n3Q93RYO0FHGFtTwMdh+O
+

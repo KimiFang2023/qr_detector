@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_885_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://forevqr.com/memorial-site/dadef75c-e6ad-495f-890c-5dd2aac94d0c
+

@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_1539_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://223.240.123.196:8000/stulogin
+

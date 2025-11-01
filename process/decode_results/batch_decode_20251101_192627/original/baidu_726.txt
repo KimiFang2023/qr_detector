@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_726.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: https://wx.tenpay.com/f2f?t=AQAAACnvpBf6KjpMFBIhLxk%2FW8g%3D
+
+Result 2:
+Type: QRCODE, Content: HTTPS://QR.ALIPAY.COM/FKX038868CWM9BA7AGBU40
+

@@ -1,0 +1,12 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_525.jpg
+Decoding successful, found 3 codes
+
+Result 1:
+Type: QRCODE, Content: khgfjhb hgfdd hjhghfsytb jghv
+
+Result 2:
+Type: QRCODE, Content: best seller
+
+Result 3:
+Type: QRCODE, Content: best seller
+

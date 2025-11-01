@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_430.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: https://weibo.com/onncc?topnav=1&wvr=6&topsug=1&is_all=1
+
+Result 2:
+Type: QRCODE, Content: https://weibo.com/u/5872836496?is_all=1
+

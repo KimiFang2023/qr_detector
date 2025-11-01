@@ -1,0 +1,9 @@
+Image: ./process/output_corrected\baidu_711_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 名片彩页画册印刷
+http://tbky86.taobao.com
+QQ:775790200
+旺旺：h627328911
+

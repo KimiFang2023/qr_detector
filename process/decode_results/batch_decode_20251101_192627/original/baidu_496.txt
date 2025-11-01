@@ -1,0 +1,66 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_496.jpg
+Decoding successful, found 21 codes
+
+Result 1:
+Type: QRCODE, Content: http://weixin.qq.com/g/A2VmjBsI-LxsJPw0
+
+Result 2:
+Type: QRCODE, Content: http://weixin.qq.com/g/A8ppP10cuVcwK9zr
+
+Result 3:
+Type: QRCODE, Content: http://weixin.qq.com/g/AbyVOtogxRfvZINe
+
+Result 4:
+Type: QRCODE, Content: http://weixin.qq.com/g/A2Pik1KDOfPmZ1xS
+
+Result 5:
+Type: QRCODE, Content: http://weixin.qq.com/g/ARvH1IVrHX1BjlGf
+
+Result 6:
+Type: QRCODE, Content: http://weixin.qq.com/g/AVvquUQfITSQimlT
+
+Result 7:
+Type: QRCODE, Content: http://weixin.qq.com/g/AVVBOfJHo1bTm21q
+
+Result 8:
+Type: QRCODE, Content: http://weixin.qq.com/g/AwPzybfS7Yvyra0g
+
+Result 9:
+Type: QRCODE, Content: http://weixin.qq.com/g/ATK1zUOdTf8gsASl
+
+Result 10:
+Type: QRCODE, Content: http://weixin.qq.com/g/AZ_raWJRC_b91PkQ
+
+Result 11:
+Type: QRCODE, Content: http://weixin.qq.com/g/AcGTYS2QvPstM_t5
+
+Result 12:
+Type: QRCODE, Content: http://weixin.qq.com/g/AX450_phBpz5okuO
+
+Result 13:
+Type: QRCODE, Content: http://weixin.qq.com/g/AaQ1xepwC0Oj1CLI
+
+Result 14:
+Type: QRCODE, Content: http://weixin.qq.com/g/AwcEIedsgXyHMs0h
+
+Result 15:
+Type: QRCODE, Content: http://weixin.qq.com/g/AcfOD1vzUnSNrH7K
+
+Result 16:
+Type: QRCODE, Content: http://weixin.qq.com/g/AVa25HMCkvxhlPf-
+
+Result 17:
+Type: QRCODE, Content: http://weixin.qq.com/g/A_yhuP_4mikAVZSZ
+
+Result 18:
+Type: QRCODE, Content: http://weixin.qq.com/g/AxuqiAo5DdPwon6g
+
+Result 19:
+Type: QRCODE, Content: http://weixin.qq.com/g/ATYrClXTr-umvoNe
+
+Result 20:
+Type: QRCODE, Content: http://weixin.qq.com/g/ASfScEFNV052MGdF
+
+Result 21:
+Type: QRCODE, Content: http://weixin.qq.com/g/AyzGjBUEPN0sbwnr
+

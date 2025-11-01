@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_412.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://c3x.me/?n=7310939161
+

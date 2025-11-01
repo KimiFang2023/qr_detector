@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_1514_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 1#进线开关柜   接地刀闸已断开
+

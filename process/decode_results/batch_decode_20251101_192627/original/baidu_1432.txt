@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1432.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: MECARD:N:Quickpai譎ｺ閭ｽ謇区惻謇ｫ遐∬ｽｯ莉ｶ;URL:http://www.quickpai.mobi;;
+

@@ -1,0 +1,8 @@
+step,total,success,success_rate_vs_original
+original,1602,376,100.00%
+output_boxed,1602,361,96.01%
+output_cropped,1863,543,144.41%
+output_corrected,1863,521,138.56%
+output_monochrome,1863,483,128.46%
+output_enhanced,1863,392,104.26%
+output_restored,1863,391,103.99%

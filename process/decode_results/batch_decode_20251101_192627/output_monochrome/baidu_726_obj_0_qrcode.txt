@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_726_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://wx.tenpay.com/f2f?t=AQAAACnvpBf6KjpMFBIhLxk%2FW8g%3D
+

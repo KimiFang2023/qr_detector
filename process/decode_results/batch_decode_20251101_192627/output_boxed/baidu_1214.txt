@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_1214.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.ce.cn/xwzx/gnsz/gdxw/202112/31/t20211231_37218510.shtml
+
+Result 2:
+Type: QRCODE, Content: http://www.ce.cn/xwzx/gnsz/gdxw/202112/31/t20211231_37218510.shtml
+

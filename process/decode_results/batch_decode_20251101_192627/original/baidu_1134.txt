@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1134.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://h5.ijovo.com/lapp/bottle
+

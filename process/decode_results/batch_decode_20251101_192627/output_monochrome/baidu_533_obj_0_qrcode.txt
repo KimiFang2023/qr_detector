@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_533_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://android.myapp.com/android/down.jsp?type=2&appid=788560&pkgid=1164729&icfa=15144282788560000000&g_f=990976
+

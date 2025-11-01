@@ -1,0 +1,6 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_1513.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: kSRqdrg6sTQ2LZ2DQSvNSE+/wqu/ZQw4AeMEfGLt7lLBUcAZSDWMvy6zfaYKZ0Ox4/cbBVh9q+JJAEblHSq9yL7xVs8nV9YzKk2GOjbPTjq5JA41eqorOoyrLjSh5go4SvyYFBAyD0zxcqdmpnWqrj2XFoIWs0DiLLQZVxB7RKMpYEakZABX3j7pnDrb3Q9AydNHBkcvHh6G5MpbYC7pn++8prdiNogvLmsm7i3g73v/cgbM8ZwQfda9QG7pnCC2AgD1AWJKlE1GYZzpJJArOlNuzn8E4HsviPJwqsd8hc0y5iAX12Kn72X3+lQVwNv/
+

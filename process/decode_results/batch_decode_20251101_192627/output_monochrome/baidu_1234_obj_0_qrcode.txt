@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_1234_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://qm.qq.com/cgi-bin/qm/qr?k=t-QaswWp161xVMsycy-1dvcjNuEi1VZj&authKey=H3op/cWMoJFXyvBf1veRtvqbYQuBtPPmoRwKP6p0pjV+v5dXp2CfgTLOhKBH9Sh/&noverify=0&personal_qrcode_source=0
+

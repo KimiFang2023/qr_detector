@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_1584_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: #TA#eJxrZ2RkmjaNn8mIYdIkFsZJzIwHZpxl0mHTYJzMyso6nZGRccKkicETTWYyTDrtEMIABqcdshsYYAAonHgAKlx4ACo4eSLDRIZJjEwMIMO8EYYxAQ0TZpgJ1xkD05kI1zmZnY1hIstUBnY2RqYDE2acOcHEyDAZ6Aygbhagbn+YbrAtzBPZJrIxTJhxlnEWWBkDA8jFBw4cgDkA5BvccmznGPjdTFi2v5y9Hoh0TZ8vn/Rkx9qXrb0vZ2x9um4n8wKO4xJapkmJBuYG5sZmZimJKclmKUnGRsamqWlmnGetTgIA2oBazg==
+

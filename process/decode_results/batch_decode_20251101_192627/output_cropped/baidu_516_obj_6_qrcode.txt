@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_516_obj_6_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.iqidi.com/H5/device?devicecode=9008
+

@@ -1,0 +1,9 @@
+Image: C:\\Users\\Kimi\\PycharmProjects\\baidu_images\baidu_476.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.spsy315.cn/m?c=4984801125089127
+
+Result 2:
+Type: QRCODE, Content: http://www.spsy315.cn/m?c=4984278025159733
+

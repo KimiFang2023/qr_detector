@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_572_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 隨ｬ荵晏ｷ･蝨ｺ隨ｬ荵晏ｷ･蝨ｺ隨ｬ荵晏ｷ･蝨ｺ隨ｬ荵晏ｷ･蝨ｺ隨ｬ荵晏ｷ･蝨ｺ隨ｬ荵晏ｷ･蝨ｺ隨ｬ荵晏ｷ･蝨ｺ隨ｬ荵晏ｷ･蝨ｺ
+
