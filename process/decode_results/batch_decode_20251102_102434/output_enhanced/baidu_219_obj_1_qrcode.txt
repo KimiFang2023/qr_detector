@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_219_obj_1_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 来时花铺满路，去时已荒芜。
+

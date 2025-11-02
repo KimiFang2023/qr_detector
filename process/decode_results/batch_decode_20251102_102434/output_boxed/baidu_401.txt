@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_401.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 123456
+

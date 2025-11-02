@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_428.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://waimai.meituan.com/getapp/1301
+
+Result 2:
+Type: QRCODE, Content: http://m.ele.me/dapp
+

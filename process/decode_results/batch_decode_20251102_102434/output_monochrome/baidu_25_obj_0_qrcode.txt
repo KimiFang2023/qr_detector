@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_25_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://u.wechat.com/MCG-lgt6msLqnF62bT4leRA
+

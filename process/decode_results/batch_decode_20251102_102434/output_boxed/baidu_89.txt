@@ -1,0 +1,24 @@
+Image: ./process/output_boxed\baidu_89.jpg
+Decoding successful, found 7 codes
+
+Result 1:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 2:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 3:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 4:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 5:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 6:
+Type: QRCODE, Content: http://m.piamo.kr
+
+Result 7:
+Type: QRCODE, Content: http://m.piamo.kr
+

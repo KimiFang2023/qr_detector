@@ -1,0 +1,18 @@
+Image: ./process/output_boxed\baidu_22.jpg
+Decoding successful, found 5 codes
+
+Result 1:
+Type: QRCODE, Content: https://work.weixin.qq.com/gm/22a488f502a2524d72eed899ca2b808c
+
+Result 2:
+Type: QRCODE, Content: https://work.weixin.qq.com/gm/b8609ca329ce1cc33ab3d361d07d77f9
+
+Result 3:
+Type: QRCODE, Content: https://work.weixin.qq.com/gm/99f61ef2743b0e525defa834a00a905d
+
+Result 4:
+Type: QRCODE, Content: https://work.weixin.qq.com/gm/3933ffe0e311a9023d25bf84d6310b15
+
+Result 5:
+Type: QRCODE, Content: https://work.weixin.qq.com/gm/d80ac54f3e9566f565613f519a009a0d
+

@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_447.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://qr.58faner.com?code=6f187eb4df124af8913fd6e9b35519d4
+

@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_476_obj_1_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.spsy315.cn/m?c=4984801125089127
+

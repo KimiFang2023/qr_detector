@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_802_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.yingyong.so/DownLoad.aspx?id=13034&tid=1&file=Mini_Ini_Mo_v1_0_10.apk
+

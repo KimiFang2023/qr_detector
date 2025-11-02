@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_4_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: wxp://f2f0N_fY0GjOFdYlo3yBLTr5kAh2n5JP24qzJojqxhU05YJ78WetvVTFFsnY2mCraUOk
+

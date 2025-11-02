@@ -1,0 +1,9 @@
+Image: ./process/output_monochrome\baidu_66_obj_0_qrcode.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: https://qr.alipay.com/fkx141466ngslj4iczwazfd
+
+Result 2:
+Type: QRCODE, Content: wxp://f2f0fy9UVPWTEuGO75XLUaHNvC5Sr5DWBzQYmCrpHvXCROGCQG-rOKfYOvwpuOBX5nzs
+

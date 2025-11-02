@@ -1,0 +1,12 @@
+Image: ./process/output_boxed\baidu_237.jpg
+Decoding successful, found 3 codes
+
+Result 1:
+Type: QRCODE, Content: https://v.tb.cn/9U.9CYn2Cy4U?sourceType=other&suid=bbd3cca3-af33-48e4-b593-bf582973858d
+
+Result 2:
+Type: QRCODE, Content: https://v.tb.cn/A8.7fpco24TZ?sourceType=other&suid=c0ff7321-81c8-4d78-b5ba-57442af8a51c
+
+Result 3:
+Type: QRCODE, Content: https://v.tb.cn/9L.3i8vblRcO?sourceType=other&suid=29f282d8-aeb2-4f48-8fd8-c353ca0d33b7
+

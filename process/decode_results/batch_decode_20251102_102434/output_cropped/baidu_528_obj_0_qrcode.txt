@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_528_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://open.weixin.qq.com/connect/confirm?uuid=041UhbQb1JZ70008
+

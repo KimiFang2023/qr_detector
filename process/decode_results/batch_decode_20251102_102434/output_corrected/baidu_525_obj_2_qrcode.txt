@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_525_obj_2_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: best seller
+

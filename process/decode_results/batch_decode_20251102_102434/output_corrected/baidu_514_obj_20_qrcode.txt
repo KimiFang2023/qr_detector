@@ -1,0 +1,8 @@
+Image: ./process/output_corrected\baidu_514_obj_20_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 鬟櫁♀
+
+
+

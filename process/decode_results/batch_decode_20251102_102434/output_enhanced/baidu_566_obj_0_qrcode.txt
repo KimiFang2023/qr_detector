@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_566_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: {"nonce_str":"ezdW9tGrzTjbfDVA","login_key":"2a2ac865bb627f266ad0608466728720"}
+

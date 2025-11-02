@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_114.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.miaoyan.org/chanzai/app?m=cx100
+

@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_1233_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://h5.dingtalk.com/circle/healthCheckin.html?corpId=ding6738cac3f0ed47a7569e6bc9793d27cf&f968b96f-f2f2=cbc91d4f-85dd&cbdbhh=qwertyuiop&origin=1
+

@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_107_obj_15_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: I love you.
+

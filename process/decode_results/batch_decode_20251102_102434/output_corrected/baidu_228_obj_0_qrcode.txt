@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_228_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.yingyong.so/DownLoad.aspx?id=14793&tid=1&file=Paperama_v1_09.apk
+

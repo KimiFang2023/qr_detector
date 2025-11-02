@@ -1,0 +1,12 @@
+Image: ./process/output_boxed\baidu_219.jpg
+Decoding successful, found 3 codes
+
+Result 1:
+Type: QRCODE, Content: 人的吸引力无法像天体那样把自己喜欢的星球吸引到自己身边为自己转，人类却可以做天体做不到的感动与惊喜。
+
+Result 2:
+Type: QRCODE, Content: 我愿意把靠窗的位置借给你，让你览遍大江南北，如果你愿意跟我一起远行的话。
+
+Result 3:
+Type: QRCODE, Content: 来时花铺满路，去时已荒芜。
+

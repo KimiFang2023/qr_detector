@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_355_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://filebacacd42ae9b.iamh5.cn/v3/idea/RF5p4KhL
+

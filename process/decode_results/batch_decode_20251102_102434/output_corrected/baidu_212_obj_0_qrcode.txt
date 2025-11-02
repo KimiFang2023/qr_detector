@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_212_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://qr.alipay.com/tsx01702vgwfqa9pfkz7db1
+

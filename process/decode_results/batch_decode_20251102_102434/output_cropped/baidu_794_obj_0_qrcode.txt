@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_794_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://u.wechat.com/EEYBfet-PeyrV53OAZIPokY
+

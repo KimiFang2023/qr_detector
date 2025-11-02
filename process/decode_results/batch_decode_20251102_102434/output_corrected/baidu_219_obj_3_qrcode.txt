@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_219_obj_3_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 岁月还漫长，你心地善良，终会有一人陪你骑马喝酒走四方。
+

@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_847.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: 281888620149106342
+
+Result 2:
+Type: QRCODE, Content: 134722866512196351
+

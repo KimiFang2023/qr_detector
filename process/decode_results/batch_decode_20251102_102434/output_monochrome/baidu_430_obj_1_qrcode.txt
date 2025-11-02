@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_430_obj_1_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIzNjIyNDIzMA==&scene=124#wechat_redirect
+

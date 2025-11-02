@@ -1,0 +1,6 @@
+Image: ./process/output_monochrome\baidu_861_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: ¾;7~wf:ba5e62c53310c693bf2cd56dd8bc30a4ba5e62c53310c
+

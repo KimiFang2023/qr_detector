@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_356_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: Z9dCc1x01497cz2r4kpdhkubmd7vqb
+

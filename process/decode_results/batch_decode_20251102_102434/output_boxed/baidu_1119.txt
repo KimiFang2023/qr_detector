@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_1119.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://qr.alipay.com/stx02107vt82v8jsq1cmd0d
+

@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_45.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://d.alipay.com/i/index.htm?b=RECEIVE_AC&u=/FThVgkcuM1wINr/PujQKkLpRN8gVFZlypUohIHOG7I=
+

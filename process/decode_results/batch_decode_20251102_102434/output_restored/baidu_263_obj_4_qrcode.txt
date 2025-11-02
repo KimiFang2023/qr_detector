@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_263_obj_4_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://vipx.qr37.cn/1P4wz9
+

@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_302_obj_1_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: PWY_O+uo0XnlqFu5vmxBj3sfa6T3izJ6h9ZCp68aPmmNTP/n3Q93RYO0FHGFtTwMdh+O
+

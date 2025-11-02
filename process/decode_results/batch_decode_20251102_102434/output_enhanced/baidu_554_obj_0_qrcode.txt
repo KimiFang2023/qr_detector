@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_554_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://qr.alipay.com/cpx06451eqbif8iwzldevaf
+

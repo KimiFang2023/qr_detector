@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_237_obj_2_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://v.tb.cn/A8.7fpco24TZ?sourceType=other&suid=c0ff7321-81c8-4d78-b5ba-57442af8a51c
+

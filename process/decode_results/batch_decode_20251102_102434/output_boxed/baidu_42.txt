@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_42.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://u.wechat.com/MEJ3yZbqj3xoC5l3eu5alTM
+

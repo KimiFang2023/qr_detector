@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_496_obj_8_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://weixin.qq.com/g/AcGTYS2QvPstM_t5
+

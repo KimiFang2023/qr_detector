@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_384_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: ＱＲコードは漢字・かなを効率よく表現することができます。
+

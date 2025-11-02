@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_198_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://weibo.cn/qr/userinfo?uid=5670937908
+

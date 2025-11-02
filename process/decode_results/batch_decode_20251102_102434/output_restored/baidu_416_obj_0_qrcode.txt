@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_416_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.huazhongwechat.com/index.php?g=Wap&m=Index&a=content&token=2cc1cd8d0b95bdb2&id=1408
+

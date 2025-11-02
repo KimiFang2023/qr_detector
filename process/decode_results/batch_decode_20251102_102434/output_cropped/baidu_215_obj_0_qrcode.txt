@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_215_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://www.wjx.cn/m/54658571.aspx
+

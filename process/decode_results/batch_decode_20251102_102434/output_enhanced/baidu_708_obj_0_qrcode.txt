@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_708_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://down-update.qq.com/sgame/Exp/20191210_V52/Android/App/7131_SGame_App_Android_0.52.2.1_r491202_Exp_noBundle_il2cpp_dex.signed.shell.apk
+

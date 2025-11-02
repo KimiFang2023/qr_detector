@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_405_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.see2eyes.cn/loveletter/index.html#/preview/259
+

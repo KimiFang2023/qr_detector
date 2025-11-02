@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_66.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: wxp://f2f0fy9UVPWTEuGO75XLUaHNvC5Sr5DWBzQYmCrpHvXCROGCQG-rOKfYOvwpuOBX5nzs
+

@@ -1,0 +1,9 @@
+Image: ./process/output_boxed\baidu_1052.jpg
+Decoding successful, found 2 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.jjwxc.net/fenzhan/bq/
+
+Result 2:
+Type: QRCODE, Content: http://t.xs.cn/?tpl_style=bright
+

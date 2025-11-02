@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_510_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://www.zcool.com.cn/u/1023995
+

@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_219_obj_5_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: 人的吸引力无法像天体那样把自己喜欢的星球吸引到自己身边为自己转，人类却可以做天体做不到的感动与惊喜。
+

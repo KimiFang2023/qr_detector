@@ -1,0 +1,6 @@
+Image: ./process/output_boxed\baidu_3.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: {"codeId":"123cccd28decdd2d99e49aaab10c5dd6","dataTime":1661264491181}
+

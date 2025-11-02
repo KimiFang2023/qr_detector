@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_1134_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://h5.ijovo.com/lapp/bottle
+

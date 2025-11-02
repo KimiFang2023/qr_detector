@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_326_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://onecode-h5.digitalhainan.com.cn/integration/v2/code/identity-code?code=SZHN0100f761157d31cd4266ab40919a23765484
+

@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_360_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://www.gyufc.org/home/project/detail/id/212
+

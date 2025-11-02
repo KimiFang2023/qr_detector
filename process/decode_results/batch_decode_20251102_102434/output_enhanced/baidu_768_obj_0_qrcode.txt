@@ -1,0 +1,6 @@
+Image: ./process/output_enhanced\baidu_768_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://file.ws.126.net/game/apk/plantsvszombies2.apk
+

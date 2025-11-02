@@ -1,0 +1,6 @@
+Image: ./process/output_corrected\baidu_861_obj_2_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: Gr d.!7]0250473bc386884bf5382eaeccd0cf0d0250473bc3868
+

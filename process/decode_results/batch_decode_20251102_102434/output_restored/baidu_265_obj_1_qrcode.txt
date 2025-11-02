@@ -1,0 +1,6 @@
+Image: ./process/output_restored\baidu_265_obj_1_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: https://spay3.swiftpass.cn/spay/payMoneyNew?mchId=178540000041&userId=178540000041&client=platform
+

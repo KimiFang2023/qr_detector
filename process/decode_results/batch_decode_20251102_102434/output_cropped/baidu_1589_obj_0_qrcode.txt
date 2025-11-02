@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_1589_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://poster.800link.top/i/j?type=1&unique=2128726&token=NUk7bzRs&level_1=0&level_2=24621548&cause=
+

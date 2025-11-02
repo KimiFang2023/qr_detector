@@ -1,0 +1,6 @@
+Image: ./process/output_cropped\baidu_799_obj_0_qrcode.jpg
+Decoding successful, found 1 codes
+
+Result 1:
+Type: QRCODE, Content: http://item.weipushop.com/wap/wpitem/6441480
+
