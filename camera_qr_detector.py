@@ -325,7 +325,7 @@ if __name__ == "__main__":
     detector = CameraQRDetector(
         model_path='./models/best.pt',  # YOLO模型路径
         camera_id=0,                    # 默认摄像头
-        resolution=(1280, 720),          # PC端更高分辨率
+        resolution=(640, 480),          # 适中的分辨率
         fps_limit=30,                   # 提高FPS限制
         enable_preprocessing=True       # 启用图像预处理
     )
