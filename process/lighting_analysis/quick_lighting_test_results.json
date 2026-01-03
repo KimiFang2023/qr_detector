@@ -1,0 +1,442 @@
+[
+  {
+    "original_condition": "暗光",
+    "optimized_condition": "暗光",
+    "original_quality": {
+      "brightness": 58.79039067013287,
+      "contrast": 104.94833997218745,
+      "sharpness": 993.9600512709357,
+      "dark_ratio": 0.7581448554992676,
+      "bright_ratio": 0.2205820381641388,
+      "dynamic_range": 255.0
+    },
+    "optimized_quality": {
+      "brightness": 58.79039067013287,
+      "contrast": 104.94833997218745,
+      "sharpness": 993.9600512709357,
+      "dark_ratio": 0.7581448554992676,
+      "bright_ratio": 0.2205820381641388,
+      "dynamic_range": 255.0,
+      "condition": "暗光"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 3.5,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 13,
+      "adaptive_threshold_c": 2,
+      "median_blur_kernel": 3,
+      "gamma_correction": 1.2,
+      "equalize_histogram": true,
+      "denoise": true
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "正常光照",
+    "optimized_condition": "正常光照",
+    "original_quality": {
+      "brightness": 128.24732427366447,
+      "contrast": 66.69918562850603,
+      "sharpness": 206.8703907766346,
+      "dark_ratio": 0.26882264018058777,
+      "bright_ratio": 0.0456431582570076,
+      "dynamic_range": 226.0
+    },
+    "optimized_quality": {
+      "brightness": 128.24732427366447,
+      "contrast": 66.69918562850603,
+      "sharpness": 206.8703907766346,
+      "dark_ratio": 0.26882264018058777,
+      "bright_ratio": 0.0456431582570076,
+      "dynamic_range": 226.0,
+      "condition": "正常光照"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 2.0,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 11,
+      "adaptive_threshold_c": 2,
+      "median_blur_kernel": 3,
+      "gamma_correction": 1.0,
+      "equalize_histogram": false,
+      "denoise": false
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "亮背景",
+    "optimized_condition": "亮背景",
+    "original_quality": {
+      "brightness": 124.5964227886057,
+      "contrast": 57.724203045070844,
+      "sharpness": 598.9734505286128,
+      "dark_ratio": 0.1184287890791893,
+      "bright_ratio": 0.1100119948387146,
+      "dynamic_range": 254.0
+    },
+    "optimized_quality": {
+      "brightness": 124.5964227886057,
+      "contrast": 57.724203045070844,
+      "sharpness": 598.9734505286128,
+      "dark_ratio": 0.1184287890791893,
+      "bright_ratio": 0.1100119948387146,
+      "dynamic_range": 254.0,
+      "condition": "亮背景"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 2.5,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 11,
+      "adaptive_threshold_c": 2,
+      "median_blur_kernel": 3,
+      "gamma_correction": 0.95,
+      "equalize_histogram": false,
+      "denoise": false
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "亮背景",
+    "optimized_condition": "亮背景",
+    "original_quality": {
+      "brightness": 118.9433239073561,
+      "contrast": 65.70181620345598,
+      "sharpness": 459.9247325606506,
+      "dark_ratio": 0.21087738871574402,
+      "bright_ratio": 0.1290397047996521,
+      "dynamic_range": 248.0
+    },
+    "optimized_quality": {
+      "brightness": 118.9433239073561,
+      "contrast": 65.70181620345598,
+      "sharpness": 459.9247325606506,
+      "dark_ratio": 0.21087738871574402,
+      "bright_ratio": 0.1290397047996521,
+      "dynamic_range": 248.0,
+      "condition": "亮背景"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 2.5,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 11,
+      "adaptive_threshold_c": 2,
+      "median_blur_kernel": 3,
+      "gamma_correction": 0.95,
+      "equalize_histogram": false,
+      "denoise": false
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "过曝",
+    "optimized_condition": "过曝",
+    "original_quality": {
+      "brightness": 233.50941829085457,
+      "contrast": 37.534046010874874,
+      "sharpness": 1927.697743472047,
+      "dark_ratio": 0.020500749349594116,
+      "bright_ratio": 0.9617391228675842,
+      "dynamic_range": 255.0
+    },
+    "optimized_quality": {
+      "brightness": 233.50941829085457,
+      "contrast": 37.534046010874874,
+      "sharpness": 1927.697743472047,
+      "dark_ratio": 0.020500749349594116,
+      "bright_ratio": 0.9617391228675842,
+      "dynamic_range": 255.0,
+      "condition": "过曝"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 1.0,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 7,
+      "adaptive_threshold_c": 4,
+      "median_blur_kernel": 5,
+      "gamma_correction": 0.7,
+      "equalize_histogram": false,
+      "denoise": false
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "过曝",
+    "optimized_condition": "过曝",
+    "original_quality": {
+      "brightness": 235.745512,
+      "contrast": 33.42471965264415,
+      "sharpness": 492.89343976959987,
+      "dark_ratio": 0.0,
+      "bright_ratio": 0.8890159726142883,
+      "dynamic_range": 157.0
+    },
+    "optimized_quality": {
+      "brightness": 235.745512,
+      "contrast": 33.42471965264415,
+      "sharpness": 492.89343976959987,
+      "dark_ratio": 0.0,
+      "bright_ratio": 0.8890159726142883,
+      "dynamic_range": 157.0,
+      "condition": "过曝"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 1.0,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 7,
+      "adaptive_threshold_c": 4,
+      "median_blur_kernel": 5,
+      "gamma_correction": 0.7,
+      "equalize_histogram": false,
+      "denoise": false
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "过曝",
+    "optimized_condition": "过曝",
+    "original_quality": {
+      "brightness": 204.1836853978671,
+      "contrast": 60.96709855881574,
+      "sharpness": 16201.612911543336,
+      "dark_ratio": 0.039253488183021545,
+      "bright_ratio": 0.7367309331893921,
+      "dynamic_range": 255.0
+    },
+    "optimized_quality": {
+      "brightness": 204.1836853978671,
+      "contrast": 60.96709855881574,
+      "sharpness": 16201.612911543336,
+      "dark_ratio": 0.039253488183021545,
+      "bright_ratio": 0.7367309331893921,
+      "dynamic_range": 255.0,
+      "condition": "过曝"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 1.0,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 7,
+      "adaptive_threshold_c": 4,
+      "median_blur_kernel": 5,
+      "gamma_correction": 0.7,
+      "equalize_histogram": false,
+      "denoise": false
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "暗光",
+    "optimized_condition": "暗光",
+    "original_quality": {
+      "brightness": 69.48242962962964,
+      "contrast": 83.994863948938,
+      "sharpness": 3638.90192888888,
+      "dark_ratio": 0.6887496113777161,
+      "bright_ratio": 0.17183111608028412,
+      "dynamic_range": 255.0
+    },
+    "optimized_quality": {
+      "brightness": 69.48242962962964,
+      "contrast": 83.994863948938,
+      "sharpness": 3638.90192888888,
+      "dark_ratio": 0.6887496113777161,
+      "bright_ratio": 0.17183111608028412,
+      "dynamic_range": 255.0,
+      "condition": "暗光"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 3.5,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 13,
+      "adaptive_threshold_c": 2,
+      "median_blur_kernel": 3,
+      "gamma_correction": 1.2,
+      "equalize_histogram": true,
+      "denoise": true
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "正常光照",
+    "optimized_condition": "正常光照",
+    "original_quality": {
+      "brightness": 105.99681477942347,
+      "contrast": 39.11659072845542,
+      "sharpness": 495.200296327283,
+      "dark_ratio": 0.07216017693281174,
+      "bright_ratio": 0.0003732680343091488,
+      "dynamic_range": 241.0
+    },
+    "optimized_quality": {
+      "brightness": 105.99681477942347,
+      "contrast": 39.11659072845542,
+      "sharpness": 495.200296327283,
+      "dark_ratio": 0.07216017693281174,
+      "bright_ratio": 0.0003732680343091488,
+      "dynamic_range": 241.0,
+      "condition": "正常光照"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 2.0,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 11,
+      "adaptive_threshold_c": 2,
+      "median_blur_kernel": 3,
+      "gamma_correction": 1.0,
+      "equalize_histogram": false,
+      "denoise": false
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  },
+  {
+    "original_condition": "暗光",
+    "optimized_condition": "暗光",
+    "original_quality": {
+      "brightness": 64.07217060810811,
+      "contrast": 62.89898488727201,
+      "sharpness": 1623.7144759883718,
+      "dark_ratio": 0.6437134146690369,
+      "bright_ratio": 0.08701013773679733,
+      "dynamic_range": 255.0
+    },
+    "optimized_quality": {
+      "brightness": 64.07217060810811,
+      "contrast": 62.89898488727201,
+      "sharpness": 1623.7144759883718,
+      "dark_ratio": 0.6437134146690369,
+      "bright_ratio": 0.08701013773679733,
+      "dynamic_range": 255.0,
+      "condition": "暗光"
+    },
+    "parameters_used": {
+      "clahe_clip_limit": 3.5,
+      "clahe_tile_grid_size": [
+        8,
+        8
+      ],
+      "gaussian_blur_kernel": [
+        3,
+        3
+      ],
+      "gaussian_blur_sigma": 0,
+      "adaptive_threshold_block_size": 13,
+      "adaptive_threshold_c": 2,
+      "median_blur_kernel": 3,
+      "gamma_correction": 1.2,
+      "equalize_histogram": true,
+      "denoise": true
+    },
+    "improvements": {
+      "brightness_improvement": 0.0,
+      "contrast_improvement": 0.0,
+      "sharpness_improvement": 0.0
+    }
+  }
+]
