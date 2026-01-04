@@ -48,7 +48,8 @@ class CameraQRDetector:
             'yolo_times': deque(maxlen=100),
             'qr_times': deque(maxlen=100),
             'total_times': deque(maxlen=100),
-            'frame_skips': 0
+            'frame_skips': 0,
+            'lighting_assessments': deque(maxlen=50)  # 光照评估统计
         }
         
         # YOLO结果缓存
@@ -56,43 +57,254 @@ class CameraQRDetector:
         self.yolo_cache_time = 0
         self.yolo_cache_duration = 0.1  # 100ms缓存
         
+        # 光照环境优化参数
+        self.last_lighting_type = None
+        self.lighting_cache_duration = 2.0  # 2秒缓存光照评估结果
+        
         print("摄像头二维码检测器已初始化")
         print(f"分辨率: {resolution[0]}x{resolution[1]}")
         print(f"FPS限制: {fps_limit}")
         print(f"预处理: {'已启用' if enable_preprocessing else '已禁用'}")
+        print("光照环境优化: 已启用智能光照评估和自适应处理")
     
-    def preprocess_image(self, image):
-        """传统图像预处理方法，优化二维码图像质量"""
+    def assess_lighting_quality(self, image):
+        """评估光照质量，返回光照类型和评估指标
+        
+        Args:
+            image: 输入图像
+            
+        Returns:
+            tuple: (lighting_type, metrics)
+                lighting_type: 光照类型 ('low_light', 'high_light', 'uneven_light', 'good_light')
+                metrics: 评估指标字典
+        """
         # 转换为灰度图
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         
-        # 应用CLAHE (对比度受限的自适应直方图均衡化)
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-        clahe_gray = clahe.apply(gray)
+        # 计算基本统计量
+        mean_brightness = np.mean(gray)
+        brightness_std = np.std(gray)
+        
+        # 计算亮度直方图分布
+        hist = cv2.calcHist([gray], [0], None, [256], [0, 256])
+        
+        # 计算暗区域比例（亮度<80）
+        dark_ratio = np.sum(hist[:80]) / np.sum(hist)
+        
+        # 计算亮区域比例（亮度>200）
+        bright_ratio = np.sum(hist[200:]) / np.sum(hist)
+        
+        # 计算局部对比度（通过小区域的方差）
+        h, w = gray.shape
+        patch_size = 32
+        local_contrasts = []
+        for i in range(0, h-patch_size, patch_size//2):
+            for j in range(0, w-patch_size, patch_size//2):
+                patch = gray[i:i+patch_size, j:j+patch_size]
+                local_contrasts.append(np.std(patch))
+        avg_local_contrast = np.mean(local_contrasts)
+        
+        # 评估光照条件
+        metrics = {
+            'mean_brightness': mean_brightness,
+            'brightness_std': brightness_std,
+            'dark_ratio': dark_ratio,
+            'bright_ratio': bright_ratio,
+            'local_contrast': avg_local_contrast
+        }
+        
+        # 分类决策逻辑
+        if mean_brightness < 60:
+            lighting_type = "low_light"
+        elif mean_brightness > 220:
+            lighting_type = "high_light" 
+        elif brightness_std > 60:
+            lighting_type = "uneven_light"
+        elif avg_local_contrast < 15:
+            lighting_type = "low_contrast"
+        else:
+            lighting_type = "good_light"
+        
+        return lighting_type, metrics
+    
+    def get_adaptive_parameters(self, lighting_type, metrics):
+        """根据光照类型获取自适应处理参数
+        
+        Args:
+            lighting_type: 光照类型
+            metrics: 评估指标
+            
+        Returns:
+            dict: 自适应处理参数
+        """
+        base_params = {
+            'clahe_clip_limit': 2.0,
+            'clahe_tile_grid': (8, 8),
+            'gaussian_blur_ksize': (3, 3),
+            'gaussian_blur_sigma': 0,
+            'adaptive_thresh_block_size': 11,
+            'adaptive_thresh_c': 2,
+            'median_blur_ksize': 3,
+            'contrast_alpha': 1.0,
+            'brightness_beta': 0
+        }
+        
+        if lighting_type == "low_light":
+            # 低光照：增强对比度，减少噪声
+            base_params.update({
+                'clahe_clip_limit': 4.0,
+                'clahe_tile_grid': (6, 6),
+                'gaussian_blur_ksize': (3, 3),
+                'adaptive_thresh_block_size': 15,
+                'adaptive_thresh_c': 1,
+                'median_blur_ksize': 3,
+                'contrast_alpha': 1.3,
+                'brightness_beta': 20
+            })
+        elif lighting_type == "high_light":
+            # 高光照：降低对比度，增强细节
+            base_params.update({
+                'clahe_clip_limit': 1.0,
+                'clahe_tile_grid': (10, 10),
+                'gaussian_blur_ksize': (3, 3),
+                'adaptive_thresh_block_size': 9,
+                'adaptive_thresh_c': 3,
+                'median_blur_ksize': 5,
+                'contrast_alpha': 0.8,
+                'brightness_beta': -10
+            })
+        elif lighting_type == "uneven_light":
+            # 光照不均：增强局部对比度
+            base_params.update({
+                'clahe_clip_limit': 3.0,
+                'clahe_tile_grid': (4, 4),
+                'adaptive_thresh_block_size': 13,
+                'adaptive_thresh_c': 1,
+                'median_blur_ksize': 3,
+                'contrast_alpha': 1.1,
+                'brightness_beta': 5
+            })
+        elif lighting_type == "low_contrast":
+            # 低对比度：大幅增强对比度
+            base_params.update({
+                'clahe_clip_limit': 5.0,
+                'clahe_tile_grid': (6, 6),
+                'adaptive_thresh_block_size': 15,
+                'adaptive_thresh_c': 1,
+                'contrast_alpha': 1.5,
+                'brightness_beta': 15
+            })
+        
+        return base_params
+    
+    def adaptive_preprocess_image(self, image):
+        """自适应图像预处理，根据光照条件动态调整参数
+        
+        Args:
+            image: 输入图像
+            
+        Returns:
+            tuple: (processed_image, lighting_type, metrics)
+        """
+        # 评估光照质量
+        lighting_type, metrics = self.assess_lighting_quality(image)
+        
+        # 记录光照评估结果
+        self.performance_stats['lighting_assessments'].append(lighting_type)
+        
+        # 获取自适应参数
+        params = self.get_adaptive_parameters(lighting_type, metrics)
+        
+        # 转换为灰度图
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        
+        # 首先应用亮度和对比度调整
+        adjusted = cv2.convertScaleAbs(gray, 
+                                     alpha=params['contrast_alpha'], 
+                                     beta=params['brightness_beta'])
+        
+        # 应用CLAHE
+        clahe = cv2.createCLAHE(clipLimit=params['clahe_clip_limit'], 
+                              tileGridSize=params['clahe_tile_grid'])
+        clahe_gray = clahe.apply(adjusted)
         
         # 应用高斯模糊降噪
-        blurred = cv2.GaussianBlur(clahe_gray, (3, 3), 0)
+        blurred = cv2.GaussianBlur(clahe_gray, 
+                                 params['gaussian_blur_ksize'], 
+                                 params['gaussian_blur_sigma'])
         
         # 自适应阈值化
         thresh = cv2.adaptiveThreshold(blurred, 255, 
                                       cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
-                                      cv2.THRESH_BINARY, 11, 2)
+                                      cv2.THRESH_BINARY, 
+                                      params['adaptive_thresh_block_size'], 
+                                      params['adaptive_thresh_c'])
         
         # 中值滤波，进一步去除噪声
-        processed = cv2.medianBlur(thresh, 3)
+        processed = cv2.medianBlur(thresh, params['median_blur_ksize'])
         
+        return processed, lighting_type, metrics
+    
+    def multi_level_enhancement(self, image):
+        """多级光照补偿策略
+        
+        Args:
+            image: 输入图像
+            
+        Returns:
+            list: 增强后的图像列表（按强度递增）
+        """
+        # 第一级：基础自适应处理
+        enhanced1, lighting_type, metrics = self.adaptive_preprocess_image(image)
+        
+        enhanced_images = [enhanced1]
+        
+        # 如果光照条件较差，添加更强的增强级别
+        if lighting_type in ["low_light", "uneven_light", "low_contrast"]:
+            # 第二级：更强的对比度增强
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            enhanced2 = cv2.convertScaleAbs(gray, alpha=1.8, beta=40)
+            enhanced2 = cv2.GaussianBlur(enhanced2, (3, 3), 0)
+            enhanced2 = cv2.adaptiveThreshold(enhanced2, 255, 
+                                            cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
+                                            cv2.THRESH_BINARY, 17, 1)
+            enhanced_images.append(enhanced2)
+            
+            # 第三级：形态学增强
+            if len(enhanced_images) == 2:
+                kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+                enhanced3 = cv2.morphologyEx(enhanced2, cv2.MORPH_CLOSE, kernel)
+                enhanced_images.append(enhanced3)
+        
+        return enhanced_images
+    
+    def preprocess_image(self, image):
+        """传统图像预处理方法，优化二维码图像质量（保持向后兼容）"""
+        # 使用新的自适应预处理方法
+        processed, _, _ = self.adaptive_preprocess_image(image)
         return processed
     
     def detect_qr_codes(self, image):
-        """使用pyzbar库识别二维码"""
+        """使用pyzbar库识别二维码（增强版，支持多级处理）"""
         # 尝试识别原始图像中的二维码
         qr_codes = pyzbar.decode(image)
         
-        # 如果原始图像识别失败，尝试处理后再识别
+        # 如果原始图像识别失败，尝试多级增强
         if not qr_codes and self.enable_preprocessing:
-            processed = self.preprocess_image(image)
-            qr_codes = pyzbar.decode(processed)
-            qr_codes = pyzbar.decode(cv2.cvtColor(processed, cv2.COLOR_GRAY2BGR))
+            enhanced_images = self.multi_level_enhancement(image)
+            
+            # 逐级尝试识别
+            for i, enhanced in enumerate(enhanced_images):
+                qr_codes = pyzbar.decode(enhanced)
+                if qr_codes:
+                    print(f"第{i+1}级增强后识别成功")
+                    break
+                
+                # 转换为BGR格式再试
+                qr_codes = pyzbar.decode(cv2.cvtColor(enhanced, cv2.COLOR_GRAY2BGR))
+                if qr_codes:
+                    print(f"第{i+1}级增强(BGR)后识别成功")
+                    break
         
         results = []
         for qr_code in qr_codes:
@@ -117,7 +329,7 @@ class CameraQRDetector:
         """获取性能统计信息"""
         stats = {}
         for key, times in self.performance_stats.items():
-            if key != 'frame_skips' and times:
+            if key not in ['frame_skips', 'lighting_assessments'] and times:
                 stats[key] = {
                     'avg': sum(times) / len(times),
                     'min': min(times),
@@ -126,6 +338,13 @@ class CameraQRDetector:
                 }
             elif key == 'frame_skips':
                 stats[key] = times
+            elif key == 'lighting_assessments' and times:
+                # 统计光照类型分布
+                lighting_counts = {}
+                for lighting_type in times:
+                    lighting_counts[lighting_type] = lighting_counts.get(lighting_type, 0) + 1
+                stats['lighting_distribution'] = lighting_counts
+        
         return stats
 
     def print_performance_stats(self):
@@ -133,7 +352,11 @@ class CameraQRDetector:
         stats = self.get_performance_stats()
         print("\n=== 性能统计 ===")
         for key, stat in stats.items():
-            if isinstance(stat, dict):
+            if key == 'lighting_distribution':
+                print(f"{key}:")
+                for lighting_type, count in stat.items():
+                    print(f"  {lighting_type}: {count}")
+            elif isinstance(stat, dict):
                 print(f"{key}: 平均={stat['avg']:.3f}s, 最小={stat['min']:.3f}s, 最大={stat['max']:.3f}s, 次数={stat['count']}")
             else:
                 print(f"{key}: {stat}")
@@ -200,6 +423,7 @@ class CameraQRDetector:
     def run(self):
         """启动摄像头实时检测 - 优化版本"""
         print("开始摄像头实时检测，按'q'键退出")
+        print("光照环境优化: 已启用智能光照评估和自适应处理")
         
         # 优化的处理参数
         yolo_interval = 3  # 每3帧运行一次YOLO检测
@@ -234,7 +458,7 @@ class CameraQRDetector:
                     self.last_yolo_result is not None):
                     yolo_results = self.last_yolo_result
                 elif self.frame_count % yolo_interval == 0:
-                # 运行YOLO检测
+                    # 运行YOLO检测
                     yolo_start = time.time()
                     yolo_results = self.model(frame_copy, verbose=False, imgsz=640)
                     yolo_time = time.time() - yolo_start
@@ -248,30 +472,30 @@ class CameraQRDetector:
                 qr_results = []
                 if yolo_results and self.frame_count % qr_interval == 0:
                     qr_start = time.time()
-                for result in yolo_results:
-                    boxes = result.boxes.xyxy.cpu().numpy()
-                    
-                    for box in boxes:
-                        x1, y1, x2, y2 = map(int, box)
+                    for result in yolo_results:
+                        boxes = result.boxes.xyxy.cpu().numpy()
                         
-                        # 裁剪检测区域
-                        roi = frame_copy[y1:y2, x1:x2]
-                        
-                        # 在ROI中识别二维码
-                        roi_qr_results = self.detect_qr_codes(roi)
-                        
-                        # 调整二维码坐标到原始图像
-                        for qr in roi_qr_results:
-                            qr['rect'] = type('obj', (object,), {
-                                'left': qr['rect'].left + x1,
-                                'top': qr['rect'].top + y1,
-                                'width': qr['rect'].width,
-                                'height': qr['rect'].height
-                            })
-                            if qr['points'] is not None:
-                                qr['points'] += np.array([x1, y1])
+                        for box in boxes:
+                            x1, y1, x2, y2 = map(int, box)
                             
-                            qr_results.append(qr)
+                            # 裁剪检测区域
+                            roi = frame_copy[y1:y2, x1:x2]
+                            
+                            # 在ROI中识别二维码
+                            roi_qr_results = self.detect_qr_codes(roi)
+                            
+                            # 调整二维码坐标到原始图像
+                            for qr in roi_qr_results:
+                                qr['rect'] = type('obj', (object,), {
+                                    'left': qr['rect'].left + x1,
+                                    'top': qr['rect'].top + y1,
+                                    'width': qr['rect'].width,
+                                    'height': qr['rect'].height
+                                })
+                                if qr['points'] is not None:
+                                    qr['points'] += np.array([x1, y1])
+                                
+                                qr_results.append(qr)
                     qr_time = time.time() - qr_start
                     self.performance_stats['qr_times'].append(qr_time)
                 
@@ -302,7 +526,7 @@ class CameraQRDetector:
                     self.print_performance_stats()
                 
                 # 显示图像，修改窗口标题
-                cv2.imshow('QR Detector - Press Q to Exit', frame)
+                cv2.imshow('QR Detector - Enhanced Lighting - Press Q to Exit', frame)
                 
                 # 按'q'键退出
                 if cv2.waitKey(1) & 0xFF == ord('q'):

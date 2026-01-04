@@ -1,0 +1,25 @@
+{
+  "session_info": {
+    "start_time": "2026-01-04T22:27:07.110607",
+    "end_time": "2026-01-04T22:27:08.632179",
+    "duration_seconds": 1.5215778350830078
+  },
+  "monitoring_data": {
+    "lighting_distribution": {
+      "uneven_light": 1
+    },
+    "detection_metrics": {
+      "total_attempts": 1,
+      "successful_detections": 0,
+      "failed_detections": 1,
+      "success_rate_by_lighting": {
+        "uneven_light": {
+          "attempts": 1,
+          "successes": 0
+        }
+      },
+      "avg_processing_time": 0.24065113067626953
+    },
+    "quality_statistics": {
+      "avg_quality_score": 95.0,
+      "min_quality_score": 
