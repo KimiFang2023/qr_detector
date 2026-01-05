@@ -107,7 +107,8 @@ class RaspberryPiQRDetector:
             'yolo_times': deque(maxlen=30),
             'qr_times': deque(maxlen=30),
             'total_times': deque(maxlen=30),
-            'frame_skips': 0
+            'frame_skips': 0,
+            'lighting_assessments': deque(maxlen=100)  # 记录光照评估结果
         }
         
         print("树莓派摄像头二维码检测器已初始化")
@@ -149,7 +150,7 @@ class RaspberryPiQRDetector:
         return thresh
 
     def detect_qr_codes(self, image):
-        """高度优化的二维码识别方法，使用多级检测策略"""
+        """高度优化的二维码识别方法，使用多级检测策略和光照优化"""
         results = []
         
         # 第一级：直接检测原始图像
@@ -189,7 +190,244 @@ class RaspberryPiQRDetector:
             except Exception:
                 pass
         
+        # 第三级：如果前两级都失败，使用多级光照增强策略
+        if not results:
+            try:
+                enhanced_images = self.multi_level_enhancement(image)
+                # 逐个尝试增强图像
+                for i, enhanced_image in enumerate(enhanced_images):
+                    if i > 2:  # 限制增强级别最多3级
+                        break
+                    qr_codes = pyzbar.decode(enhanced_image)
+                    if qr_codes:
+                        for qr_code in qr_codes:
+                            try:
+                                data = qr_code.data.decode("utf-8")
+                                results.append({
+                                    'data': data,
+                                    'rect': qr_code.rect,
+                                    'points': np.array(qr_code.polygon, dtype=np.int32) if qr_code.polygon else None,
+                                    'enhancement_level': i + 1  # 记录增强级别
+                                })
+                            except UnicodeDecodeError:
+                                continue
+                        # 找到结果就停止
+                        break
+            except Exception:
+                pass
+        
         return results
+
+    def assess_lighting_quality(self, image):
+        """评估光照质量，返回光照类型和评估指标
+        
+        Args:
+            image: 输入图像
+            
+        Returns:
+            tuple: (lighting_type, metrics)
+                lighting_type: 光照类型 ('low_light', 'high_light', 'uneven_light', 'good_light')
+                metrics: 评估指标字典
+        """
+        # 转换为灰度图
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        
+        # 计算基本统计量
+        mean_brightness = np.mean(gray)
+        brightness_std = np.std(gray)
+        
+        # 计算亮度直方图分布
+        hist = cv2.calcHist([gray], [0], None, [256], [0, 256])
+        
+        # 计算暗区域比例（亮度<80）
+        dark_ratio = np.sum(hist[:80]) / np.sum(hist)
+        
+        # 计算亮区域比例（亮度>200）
+        bright_ratio = np.sum(hist[200:]) / np.sum(hist)
+        
+        # 计算局部对比度（通过小区域的方差）
+        h, w = gray.shape
+        patch_size = 32
+        local_contrasts = []
+        for i in range(0, h-patch_size, patch_size//2):
+            for j in range(0, w-patch_size, patch_size//2):
+                patch = gray[i:i+patch_size, j:j+patch_size]
+                local_contrasts.append(np.std(patch))
+        avg_local_contrast = np.mean(local_contrasts)
+        
+        # 评估光照条件
+        metrics = {
+            'mean_brightness': mean_brightness,
+            'brightness_std': brightness_std,
+            'dark_ratio': dark_ratio,
+            'bright_ratio': bright_ratio,
+            'local_contrast': avg_local_contrast
+        }
+        
+        # 分类决策逻辑
+        if mean_brightness < 60:
+            lighting_type = "low_light"
+        elif mean_brightness > 220:
+            lighting_type = "high_light" 
+        elif brightness_std > 60:
+            lighting_type = "uneven_light"
+        elif avg_local_contrast < 15:
+            lighting_type = "low_contrast"
+        else:
+            lighting_type = "good_light"
+        
+        return lighting_type, metrics
+
+    def get_adaptive_parameters(self, lighting_type, metrics):
+        """根据光照类型获取自适应处理参数
+        
+        Args:
+            lighting_type: 光照类型
+            metrics: 评估指标
+            
+        Returns:
+            dict: 自适应处理参数
+        """
+        base_params = {
+            'clahe_clip_limit': 2.0,
+            'clahe_tile_grid': (8, 8),
+            'gaussian_blur_ksize': (3, 3),
+            'gaussian_blur_sigma': 0,
+            'adaptive_thresh_block_size': 11,
+            'adaptive_thresh_c': 2,
+            'median_blur_ksize': 3,
+            'contrast_alpha': 1.0,
+            'brightness_beta': 0
+        }
+        
+        if lighting_type == "low_light":
+            # 低光照：增强对比度，减少噪声
+            base_params.update({
+                'clahe_clip_limit': 4.0,
+                'clahe_tile_grid': (6, 6),
+                'gaussian_blur_ksize': (3, 3),
+                'adaptive_thresh_block_size': 15,
+                'adaptive_thresh_c': 1,
+                'median_blur_ksize': 3,
+                'contrast_alpha': 1.3,
+                'brightness_beta': 20
+            })
+        elif lighting_type == "high_light":
+            # 高光照：降低对比度，增强细节
+            base_params.update({
+                'clahe_clip_limit': 1.0,
+                'clahe_tile_grid': (10, 10),
+                'gaussian_blur_ksize': (3, 3),
+                'adaptive_thresh_block_size': 9,
+                'adaptive_thresh_c': 3,
+                'median_blur_ksize': 5,
+                'contrast_alpha': 0.8,
+                'brightness_beta': -10
+            })
+        elif lighting_type == "uneven_light":
+            # 光照不均：增强局部对比度
+            base_params.update({
+                'clahe_clip_limit': 3.0,
+                'clahe_tile_grid': (4, 4),
+                'adaptive_thresh_block_size': 13,
+                'adaptive_thresh_c': 1,
+                'median_blur_ksize': 3,
+                'contrast_alpha': 1.1,
+                'brightness_beta': 5
+            })
+        elif lighting_type == "low_contrast":
+            # 低对比度：大幅增强对比度
+            base_params.update({
+                'clahe_clip_limit': 5.0,
+                'clahe_tile_grid': (6, 6),
+                'adaptive_thresh_block_size': 15,
+                'adaptive_thresh_c': 1,
+                'contrast_alpha': 1.5,
+                'brightness_beta': 15
+            })
+        
+        return base_params
+
+    def adaptive_preprocess_image(self, image):
+        """自适应图像预处理，根据光照条件动态调整参数
+        
+        Args:
+            image: 输入图像
+            
+        Returns:
+            tuple: (processed_image, lighting_type, metrics)
+        """
+        # 评估光照质量
+        lighting_type, metrics = self.assess_lighting_quality(image)
+        
+        # 记录光照评估结果
+        self.performance_stats['lighting_assessments'].append(lighting_type)
+        
+        # 获取自适应参数
+        params = self.get_adaptive_parameters(lighting_type, metrics)
+        
+        # 转换为灰度图
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        
+        # 首先应用亮度和对比度调整
+        adjusted = cv2.convertScaleAbs(gray, 
+                                     alpha=params['contrast_alpha'], 
+                                     beta=params['brightness_beta'])
+        
+        # 应用CLAHE
+        clahe = cv2.createCLAHE(clipLimit=params['clahe_clip_limit'], 
+                              tileGridSize=params['clahe_tile_grid'])
+        clahe_gray = clahe.apply(adjusted)
+        
+        # 应用高斯模糊降噪
+        blurred = cv2.GaussianBlur(clahe_gray, 
+                                 params['gaussian_blur_ksize'], 
+                                 params['gaussian_blur_sigma'])
+        
+        # 自适应阈值化
+        thresh = cv2.adaptiveThreshold(blurred, 255, 
+                                      cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
+                                      cv2.THRESH_BINARY, 
+                                      params['adaptive_thresh_block_size'], 
+                                      params['adaptive_thresh_c'])
+        
+        # 中值滤波，进一步去除噪声
+        processed = cv2.medianBlur(thresh, params['median_blur_ksize'])
+        
+        return processed, lighting_type, metrics
+
+    def multi_level_enhancement(self, image):
+        """多级光照补偿策略
+        
+        Args:
+            image: 输入图像
+            
+        Returns:
+            list: 增强后的图像列表（按强度递增）
+        """
+        # 第一级：基础自适应处理
+        enhanced1, lighting_type, metrics = self.adaptive_preprocess_image(image)
+        
+        enhanced_images = [enhanced1]
+        
+        # 如果光照条件较差，添加更强的增强级别
+        if lighting_type in ["low_light", "uneven_light", "low_contrast"]:
+            # 第二级：更强的对比度增强
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            enhanced2 = cv2.convertScaleAbs(gray, alpha=1.8, beta=40)
+            enhanced2 = cv2.GaussianBlur(enhanced2, (3, 3), 0)
+            enhanced2 = cv2.adaptiveThreshold(enhanced2, 255, 
+                                            cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
+                                            cv2.THRESH_BINARY, 17, 1)
+            enhanced_images.append(enhanced2)
+            
+            # 第三级：形态学增强
+            if len(enhanced_images) == 2:
+                kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+                enhanced3 = cv2.morphologyEx(enhanced2, cv2.MORPH_CLOSE, kernel)
+                enhanced_images.append(enhanced3)
+        
+        return enhanced_images
 
     def capture_frames(self):
         """独立的图像捕获线程"""
@@ -279,27 +517,52 @@ class RaspberryPiQRDetector:
             print(f"保存图像失败: {e}")
 
     def get_performance_stats(self):
-        """获取性能统计信息"""
+        """获取性能统计信息，包含光照优化统计"""
         stats = {}
         for key, times in self.performance_stats.items():
             if key != 'frame_skips' and times:
-                stats[key] = {
-                    'avg': sum(times) / len(times),
-                    'min': min(times),
-                    'max': max(times),
-                    'count': len(times)
-                }
+                if key == 'lighting_assessments':
+                    # 特殊处理光照评估统计
+                    lighting_counts = {}
+                    for lighting_type in times:
+                        lighting_counts[lighting_type] = lighting_counts.get(lighting_type, 0) + 1
+                    total_assessments = sum(lighting_counts.values())
+                    
+                    stats[key] = {
+                        'lighting_distribution': lighting_counts,
+                        'total_assessments': total_assessments,
+                        'most_common': max(lighting_counts, key=lighting_counts.get) if lighting_counts else None,
+                        'percentage': {k: round(v/total_assessments*100, 1) if total_assessments > 0 else 0 
+                                    for k, v in lighting_counts.items()}
+                    }
+                else:
+                    stats[key] = {
+                        'avg': sum(times) / len(times),
+                        'min': min(times),
+                        'max': max(times),
+                        'count': len(times)
+                    }
             elif key == 'frame_skips':
                 stats[key] = times
         return stats
 
     def print_performance_stats(self):
-        """打印性能统计信息"""
+        """打印性能统计信息，包含光照优化报告"""
         stats = self.get_performance_stats()
         print("\n=== 性能统计 ===")
         for key, stat in stats.items():
             if isinstance(stat, dict):
-                print(f"{key}: 平均={stat['avg']:.3f}s, 最小={stat['min']:.3f}s, 最大={stat['max']:.3f}s, 次数={stat['count']}")
+                if key == 'lighting_assessments':
+                    print("光照评估统计:")
+                    print(f"  总评估次数: {stat['total_assessments']}")
+                    if stat['lighting_distribution']:
+                        print(f"  光照类型分布:")
+                        for lighting_type, count in stat['lighting_distribution'].items():
+                            percentage = stat['percentage'][lighting_type]
+                            print(f"    {lighting_type}: {count}次 ({percentage}%)")
+                        print(f"  主要光照类型: {stat['most_common']}")
+                else:
+                    print(f"{key}: 平均={stat['avg']:.3f}s, 最小={stat['min']:.3f}s, 最大={stat['max']:.3f}s, 次数={stat['count']}")
             else:
                 print(f"{key}: {stat}")
         print("===============\n")
@@ -453,6 +716,38 @@ class RaspberryPiQRDetector:
                                     })
                                 except UnicodeDecodeError:
                                     continue
+                    except Exception:
+                        pass
+                    qr_time = time.time() - qr_start
+                    self.performance_stats['qr_times'].append(qr_time)
+                
+                # 如果全图检测也没有结果，尝试多级增强检测
+                if not qr_results and self.frame_count % (qr_interval * 3) == 0:
+                    qr_start = time.time()
+                    try:
+                        # 使用多级增强策略进行检测
+                        enhanced_images = self.multi_level_enhancement(frame)
+                        
+                        # 逐个尝试增强图像
+                        for i, enhanced_image in enumerate(enhanced_images):
+                            if i > 2:  # 限制增强级别最多3级
+                                break
+                            
+                            enhanced_qr_codes = pyzbar.decode(enhanced_image)
+                            if enhanced_qr_codes:
+                                for qr_code in enhanced_qr_codes:
+                                    try:
+                                        data = qr_code.data.decode("utf-8")
+                                        qr_results.append({
+                                            'data': data,
+                                            'rect': qr_code.rect,
+                                            'points': np.array(qr_code.polygon, dtype=np.int32) if qr_code.polygon else None,
+                                            'enhancement_level': i + 1  # 记录增强级别
+                                        })
+                                    except UnicodeDecodeError:
+                                        continue
+                                # 找到结果就停止
+                                break
                     except Exception:
                         pass
                     qr_time = time.time() - qr_start
