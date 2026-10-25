@@ -8,7 +8,7 @@ import os
 from collections import deque
 
 class CameraQRDetector:
-    def __init__(self, model_path='./models/best.pt', camera_id=0, resolution=(640, 480), 
+    def __init__(self, model_path='./models/best.pt', camera_id=0, resolution=(416, 416), 
                  fps_limit=15, enable_preprocessing=True):
         """初始化摄像头二维码检测器
         
@@ -426,7 +426,7 @@ class CameraQRDetector:
         print("光照环境优化: 已启用智能光照评估和自适应处理")
         
         # 优化的处理参数
-        yolo_interval = 3  # 每3帧运行一次YOLO检测
+        yolo_interval = 5  # 每5帧运行一次YOLO检测
         qr_interval = 2    # 每2帧运行一次二维码检测
         
         try:
@@ -460,7 +460,7 @@ class CameraQRDetector:
                 elif self.frame_count % yolo_interval == 0:
                     # 运行YOLO检测
                     yolo_start = time.time()
-                    yolo_results = self.model(frame_copy, verbose=False, imgsz=640)
+                    yolo_results = self.model(frame_copy, verbose=False, imgsz=416)
                     yolo_time = time.time() - yolo_start
                     self.performance_stats['yolo_times'].append(yolo_time)
                     
@@ -549,7 +549,7 @@ if __name__ == "__main__":
     detector = CameraQRDetector(
         model_path='./models/best.pt',  # YOLO模型路径
         camera_id=0,                    # 默认摄像头
-        resolution=(640, 480),          # 适中的分辨率
+        resolution=(416, 416),          # 适中的分辨率
         fps_limit=30,                   # 提高FPS限制
         enable_preprocessing=True       # 启用图像预处理
     )

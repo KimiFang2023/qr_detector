@@ -16,7 +16,7 @@ global should_exit
 should_exit = False
 
 class RaspberryPiQRDetector:
-    def __init__(self, model_path='./models/best.pt', resolution=(480, 320), 
+    def __init__(self, model_path='./models/best.pt', resolution=(416, 416), 
                  fps_limit=20, enable_preprocessing=False, save_images=False,
                  yolo_confidence=0.4, image_save_interval=5.0):
         """初始化树莓派摄像头二维码检测器
@@ -812,7 +812,7 @@ class RaspberryPiQRDetector:
 
 if __name__ == "__main__":
     # 树莓派5平衡质量和性能的配置
-    resolution = (640, 480)  # 适中的分辨率保持清晰度
+    resolution = (416, 416)  # 适中的分辨率保持清晰度
     fps_limit = 25          # 保持良好帧率
     
     # 创建并运行检测器
